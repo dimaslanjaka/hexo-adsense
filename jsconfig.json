@@ -1,0 +1,1 @@
+{ "compilerOptions": { "module": "CommonJS", "target": "ES3" }, "exclude": ["node_modules"] }

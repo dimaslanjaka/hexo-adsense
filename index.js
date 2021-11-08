@@ -1,11 +1,23 @@
 /* global hexo */
-const injector2 = require("hexo-extend-injector2");
+"use strict";
+
+const injector2 = require("./packages/hexo-extend-injector2/index");
 const fs = require("hexo-fs");
 const path = require("path");
 
+if (typeof hexo == "undefined") {
+  console.log("[hexo-adsense] Not hexo process, skipping..");
+  return;
+}
+
 if (typeof hexo != "undefined") {
   const injector = injector2(hexo); // will make it as plugin
-  const config = hexo.config.adsense;
+  const config = require("./lib/config")(hexo);
+
+  if (config.pub.length < 1) {
+    console.log(`adsense ca-pub (adsense.pub) not configured in _config.yml`);
+    return;
+  }
 
   if (typeof config.adblock == "boolean") {
     if (config.adblock) {
@@ -27,7 +39,27 @@ if (typeof hexo != "undefined") {
     }
   }
 
-  injector.register("head-end", {
+  /*injector.register("head-end", {
     value: `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1165447249910969" crossorigin="anonymous"></script>`,
-  });
+  });*/
+
+  if (typeof config.article_ads != "undefined") {
+    /*
+    injector.register("body-end", function () {
+      let adshtml = [];
+      if (Array.isArray(config.article_ads)) {
+        adshtml = config.article_ads;
+      }
+      if (adshtml.length) {
+        return require("./lib/article-ads").endbodycode(adshtml, hexo);
+      }
+    });
+    */
+
+    if (config.field === "post") {
+      hexo.extend.filter.register("after_post_render", require("./lib/article-ads").injectAdsContent);
+    } else {
+      hexo.extend.filter.register("after_render:html", require("./lib/article-ads").injectAdsContent);
+    }
+  }
 }
