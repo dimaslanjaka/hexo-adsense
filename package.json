@@ -12,12 +12,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.7.2",
     "eslint": "^7.32.0",
     "hexo": "^5.4.0",
     "hexo-extend-injector2": "file:packages/hexo-extend-injector2",
     "hexo-fs": "^3.1.0",
     "md5-file": "^4.0.0",
-    "memfs": "^3.3.0"
+    "memfs": "^3.3.0",
+    "minimatch": "^3.0.4",
+    "object-assign": "^4.1.1",
+    "yargs": "^17.2.1"
   },
   "devDependencies": {
     "@types/jsdom": "^16.2.13",

@@ -6,6 +6,7 @@ const isBrowser = new Function("try {return this===window;}catch(e){ return fals
 if (isBrowser()) {
   console.clear();
 }
+
 /**
  * @type {import("../lib/config")}
  */

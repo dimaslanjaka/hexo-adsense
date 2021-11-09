@@ -5,13 +5,13 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "command": "cd ../../ && hexo clean && hexo server",
+      "command": "cd ../../ && hexo clean && hexo server --development",
       "name": "hexo clean server from ../../",
       "request": "launch",
       "type": "node-terminal"
     },
     {
-      "command": "cd ../../ && hexo server",
+      "command": "cd ../../ && hexo server --development",
       "name": "hexo server from ../../",
       "request": "launch",
       "type": "node-terminal"

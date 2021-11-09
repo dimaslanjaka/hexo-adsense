@@ -6,6 +6,9 @@ const fs = require("hexo-fs");
 const path = require("path");
 const checkLocalHost = require("./lib/checkLocalHost");
 const getConfig = require("./lib/config");
+const argv = require("yargs");
+const isProduction = argv["production"] !== undefined;
+const isDevelopment = argv["development"] !== undefined;
 
 if (typeof hexo == "undefined") {
   console.log("[hexo-adsense] Not hexo process, skipping..");
@@ -22,33 +25,29 @@ if (typeof hexo != "undefined") {
   }
 
   // only apply these function on remote
-  checkLocalHost.default("127.0.0.1").then(function (isLocalHost) {
-    if (!isLocalHost) {
-      //hexo.log.debug("is remote");
-      // add redirect https
-      if (typeof config.https == "boolean") {
-        if (config.https) {
-          injector.register("body-end", function () {
-            const https_js = fs.readFileSync(path.join(__dirname, "source/https.js")).toString();
-            return `<script>${https_js}</script>`;
-          });
-        }
+  if (!isDevelopment) {
+    //hexo.log.debug("is remote");
+    // add redirect https
+    if (typeof config.https == "boolean") {
+      if (config.https) {
+        injector.register("body-end", function () {
+          const https_js = fs.readFileSync(path.join(__dirname, "source/https.js")).toString();
+          return `<script>${https_js}</script>`;
+        });
       }
-
-      // add adblock blocker
-      if (typeof config.adblock == "boolean") {
-        if (config.adblock) {
-          const adblock_css = fs.readFileSync(path.join(__dirname, "source/adblock.css")).toString();
-          const adblock_js = fs.readFileSync(path.join(__dirname, "source/adblock.js")).toString();
-          injector.register("body-end", function () {
-            return `<style>${adblock_css}</style><script>${adblock_js}</script>`;
-          });
-        }
-      }
-    } else {
-      //console.log("is localhost");
     }
-  });
+
+    // add adblock blocker
+    if (typeof config.adblock == "boolean") {
+      if (config.adblock) {
+        const adblock_css = fs.readFileSync(path.join(__dirname, "source/adblock.css")).toString();
+        const adblock_js = fs.readFileSync(path.join(__dirname, "source/adblock.js")).toString();
+        injector.register("body-end", function () {
+          return `<style>${adblock_css}</style><script>${adblock_js}</script>`;
+        });
+      }
+    }
+  }
 
   injector.register("head_end", function () {
     return `<script id="hexo-adsense-config" type="application/json">${JSON.stringify(config, null, 2)}</script>`;
