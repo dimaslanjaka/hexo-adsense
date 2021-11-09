@@ -123,8 +123,12 @@ if (article.length > 0 && adscont.length > 0) {
     if (ads_fill.length > 0) {
       for (let index = 0; index < ads_fill.length; index++) {
         const toFill = ads_fill[index];
+        if (typeof adscont[index] !== "undefined") {
+          toFill.appendChild(adscont[index]);
+        }
       }
     }
+    adshide.remove();
   } else {
     console.log("webpage is not post");
   }
