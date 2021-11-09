@@ -4,11 +4,15 @@
  * @param {HTMLElement} oldElement
  */
 function insertAfter(newElement, oldElement) {
-  let parent = oldElement.parentNode;
-  if (parent.lastChild == oldElement) {
-    parent.appendChild(newElement);
+  if (oldElement && newElement) {
+    let parent = oldElement.parentNode;
+    if (parent.lastChild == oldElement) {
+      parent.appendChild(newElement);
+    } else {
+      parent.insertBefore(newElement, oldElement.nextSibling);
+    }
   } else {
-    parent.insertBefore(newElement, oldElement.nextSibling);
+    console.error("cannot insert element");
   }
 }
 
@@ -18,8 +22,10 @@ function insertAfter(newElement, oldElement) {
  * @param {HTMLElement} oldElement
  */
 function replaceWith(newElement, oldElement) {
-  oldElement.parentNode.replaceChild(newElement, oldElement);
+  if (oldElement) oldElement.parentNode.replaceChild(newElement, oldElement);
 }
+
+var isBrowser = new Function("try {return this===window;}catch(e){ return false;}");
 
 function oldMethod() {
   let article = document.getElementsByTagName("article");
@@ -49,4 +55,11 @@ if (article.length > 0) {
       return replaceWith(adscont, linebreak.item(0));
     }
   }
+}
+
+if (!isBrowser()) {
+  module.exports = {
+    replaceWith,
+    insertAfter,
+  };
 }

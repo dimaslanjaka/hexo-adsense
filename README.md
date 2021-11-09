@@ -1,5 +1,5 @@
 # hexo-adsense
-Hexo adsense support
+Hexo adsense support (under development)
 
 ### _config.yml
 ```yaml
@@ -22,6 +22,26 @@ adsense:
   exclude:
     - "*.min.html"
     - "exclude/**/*"
+```
+
+### Article Ads
+> include to config article_ads
+```yaml
+adsense:
+  article_ads:
+    - "source/ads/in_article.html"
+```
+> `source/ads/in_article.html` contents
+```html
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-xxxxx"
+     data-ad-slot="xxxxx"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 ```
 
 # disable options
