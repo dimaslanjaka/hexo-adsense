@@ -1,0 +1,27 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "command": "cd ../../ && hexo clean && hexo server",
+      "name": "hexo clean server from ../../",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "command": "cd ../../ && hexo server",
+      "name": "hexo server from ../../",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "type": "pwa-node",
+      "request": "launch",
+      "name": "Test Memorize",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/__test__/memorize.js"
+    }
+  ]
+}

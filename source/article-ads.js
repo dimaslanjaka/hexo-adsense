@@ -1,4 +1,8 @@
 /**
+ * Browser processor
+ */
+
+/**
  * Insert after element
  * @param {HTMLElement} newElement
  * @param {HTMLElement} oldElement
@@ -45,15 +49,19 @@ function oldMethod() {
   }
 }
 
-let article = document.getElementsByTagName("article");
-if (article.length > 0) {
+let adscont = document.querySelectorAll('[hexo-adsense="ads-content"]');
+let article = document.querySelectorAll("article");
+if (article.length > 0 && adscont.length > 0) {
   if (article.length == 1) {
+    console.log("webpage is post");
     let targetArticle = article.item(0);
     // find br
     let linebreak = targetArticle.getElementsByTagName("br");
     if (linebreak.length > 0) {
       return replaceWith(adscont, linebreak.item(0));
     }
+  } else {
+    console.log("webpage is not post");
   }
 }
 
