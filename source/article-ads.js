@@ -2,6 +2,11 @@
  * Browser processor
  */
 
+const isBrowser = new Function("try {return this===window;}catch(e){ return false;}");
+if (isBrowser()) {
+  console.clear();
+}
+
 /**
  * Insert after element
  * @param {HTMLElement} newElement
@@ -26,10 +31,23 @@ function insertAfter(newElement, oldElement) {
  * @param {HTMLElement} oldElement
  */
 function replaceWith(newElement, oldElement) {
-  if (oldElement) oldElement.parentNode.replaceChild(newElement, oldElement);
+  if (!oldElement.parentNode) {
+    console.log(oldElement, "parent null");
+  } else {
+    oldElement.parentNode.replaceChild(newElement, oldElement);
+  }
 }
 
-var isBrowser = new Function("try {return this===window;}catch(e){ return false;}");
+let createElementFromHTML = function (htmlString) {
+  if (htmlString instanceof HTMLElement) {
+    return htmlString;
+  }
+  var div = document.createElement("div");
+  div.innerHTML = htmlString.trim();
+
+  // Change this to div.childNodes to support multiple top-level nodes
+  return div.firstChild;
+};
 
 function oldMethod() {
   let article = document.getElementsByTagName("article");
@@ -56,9 +74,12 @@ if (article.length > 0 && adscont.length > 0) {
     console.log("webpage is post");
     let targetArticle = article.item(0);
     // find br
-    let linebreak = targetArticle.getElementsByTagName("br");
+    let linebreak = targetArticle.querySelectorAll("br");
     if (linebreak.length > 0) {
-      return replaceWith(adscont, linebreak.item(0));
+      for (let index = 0; index < adscont.length; index++) {
+        const ads = adscont[index];
+        replaceWith(createElementFromHTML(ads), linebreak.item(0));
+      }
     }
   } else {
     console.log("webpage is not post");

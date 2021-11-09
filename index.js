@@ -21,9 +21,9 @@ if (typeof hexo != "undefined") {
   }
 
   // only apply these function on remote
-  checkLocalHost.isLocalHost().then(function (isLocalHost) {
+  checkLocalHost.default("127.0.0.1").then(function (isLocalHost) {
     if (!isLocalHost) {
-      console.log("is remote");
+      //hexo.log.debug("is remote");
       // add redirect https
       if (typeof config.https == "boolean") {
         if (config.https) {
@@ -45,7 +45,7 @@ if (typeof hexo != "undefined") {
         }
       }
     } else {
-      console.log("is localhost");
+      //console.log("is localhost");
     }
   });
 
