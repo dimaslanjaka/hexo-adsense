@@ -4678,7 +4678,7 @@ localStorage.setItem(&#39;popState&#39;,&#39;shown&#39;)
     </b:widget>
     <b:widget id='Feed1' locked='false' title='May you interested' type='Feed'>
       <b:widget-settings>
-        <b:widget-setting name='feedUrl'>https://git.webmanajemen.com/atom.xml</b:widget-setting>
+        <b:widget-setting name='feedUrl'>https://www.webmanajemen.com/atom.xml</b:widget-setting>
         <b:widget-setting name='openLinksInNewWindow'>true</b:widget-setting>
         <b:widget-setting name='numItemsShow'>5</b:widget-setting>
         <b:widget-setting name='showItemDate'>true</b:widget-setting>
