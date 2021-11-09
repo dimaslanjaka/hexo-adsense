@@ -1,8 +1,7 @@
-*[hexo-adsense-fill],
 *[hexo-adsense="ads-content"] {
   display: inline-block;
   background: #fff url(//i.imgur.com/mBbv90p.png) no-repeat top right;
-  padding-top: 9px;
+  color: #303030;
   min-height: 18px;
   min-width: 81px;
 }

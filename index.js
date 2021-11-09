@@ -5,6 +5,7 @@ const injector2 = require("./packages/hexo-extend-injector2/index");
 const fs = require("hexo-fs");
 const path = require("path");
 const checkLocalHost = require("./lib/checkLocalHost");
+const getConfig = require("./lib/config");
 
 if (typeof hexo == "undefined") {
   console.log("[hexo-adsense] Not hexo process, skipping..");
@@ -13,7 +14,7 @@ if (typeof hexo == "undefined") {
 
 if (typeof hexo != "undefined") {
   const injector = injector2(hexo); // will make it as plugin
-  const config = require("./lib/config")(hexo);
+  const config = getConfig(hexo);
 
   if (config.pub.length < 1) {
     console.log(`adsense ca-pub (adsense.pub) not configured in _config.yml`);
@@ -47,6 +48,10 @@ if (typeof hexo != "undefined") {
     } else {
       //console.log("is localhost");
     }
+  });
+
+  injector.register("head_end", function () {
+    return `<script id="hexo-adsense-config" type="application/json">${JSON.stringify(config, null, 2)}</script>`;
   });
 
   /*injector.register("head-end", {
