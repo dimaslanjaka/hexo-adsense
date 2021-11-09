@@ -88,7 +88,7 @@ function ranumb(min, max) {
 }
 
 const adshide = document.getElementById("hexo-adsense-hidden");
-const adscont = adshide.querySelectorAll('[hexo-adsense="ads-content"]');
+let adscont = adshide.querySelectorAll('[hexo-adsense="ads-content"]');
 const article = document.querySelectorAll("article");
 if (article.length > 0 && adscont.length > 0) {
   if (article.length == 1) {
@@ -128,7 +128,9 @@ if (article.length > 0 && adscont.length > 0) {
         }
       }
     }
-    adshide.remove();
+    //adshide.remove();
+    adscont = adshide.querySelectorAll('[hexo-adsense="ads-content"]');
+    console.log(adscont.length, "ads left");
   } else {
     console.log("webpage is not post");
   }
