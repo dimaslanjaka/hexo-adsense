@@ -129,7 +129,7 @@ function newMethod() {
         }
       }
 
-      // auto ads on headers
+      // the rest of the ads will show automatically after headers elements
       adscont = adshide.querySelectorAll('[hexo-adsense="ads-content"]');
       //console.log(adscont.length, "ads left");
       if (adscont.length > 0) {
@@ -146,22 +146,25 @@ function newMethod() {
             const header = headers.item(rheader);
             insertAfter(createElementFromHTML(ads), header);
           }
-          /*
+        }
+      }
+
+      // the rest of the ads will show automatically to linebreak elements
+      adscont = adshide.querySelectorAll('[hexo-adsense="ads-content"]');
+      if (adscont.length > 0) {
+        const linebreaks = targetArticle.querySelectorAll("h1,h2,h3,h4,h5,h6,hr");
+        if (linebreaks.length > 0) {
+          // generate index of linebreaks
+          let linebreaks_index = Array.apply(null, { length: linebreaks.length }).map(Number.call, Number);
+          //console.log(linebreaks_index);
           for (let index = 0; index < adscont.length; index++) {
             ads = adscont[index];
-            let create_index = Array.apply(null, { length: adscont.length }).map(Number.call, Number);
-            console.log(create_index);
-            let new_index = ranumb(0, headers.length);
-            if (header_index === 0) {
-              header_index = new_index;
-            } else if (new_index === header_index) {
-              header_index = ranumb(0, headers.length);
-            }
-            console.log({ "header i": header_index, "ads i": index });
-            //const header = headers.item(ranumb(0, headers.length));
-            //
+            const rlinebreaks = shuffleArr2(linebreaks_index);
+            // pick a random index
+            const rlinebreak = rlinebreaks.next().value;
+            const linebreak = linebreaks.item(rlinebreak);
+            replaceWith(createElementFromHTML(ads), linebreak);
           }
-          */
         }
       }
     } else {
