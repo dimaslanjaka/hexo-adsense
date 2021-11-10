@@ -3,9 +3,6 @@
  */
 
 const isBrowser = new Function("try {return this===window;}catch(e){ return false;}");
-if (isBrowser()) {
-  console.clear();
-}
 
 /**
  * @type {import("../lib/config")}

@@ -8,7 +8,7 @@ const getConfig = require("./lib/config");
 const isDevelopment = require("./lib/config")(hexo).development;
 
 if (typeof hexo == "undefined") {
-  console.log("[hexo-adsense] Not hexo process, skipping..");
+  //console.log("[hexo-adsense] Not hexo process, skipping..");
   return;
 }
 
@@ -22,7 +22,7 @@ if (typeof hexo != "undefined") {
   }
 
   if (typeof hexo.env !== "undefined") {
-    console.log(hexo.env);
+    //console.log(hexo.env);
   }
 
   // only apply these function on production
