@@ -8,6 +8,21 @@
   <b:attr name='xmlns:data' value=''/>
 
 <meta content='width=device-width, initial-scale=1' name='viewport'/>
+<script type="text/javascript">
+  // <![CDATA[
+  if (window.location.host == "web-manajemen.blogspot.com") {
+    let href = window.location.href;
+    let url = new URL(href);
+    //console.log(url);
+    //console.log(url.toString());
+    url.host = "www.webmanajemen.com";
+    url.hostname = "www.webmanajemen.com";
+    let newhref = url.protocol + "//" + url.host + url.pathname + url.search + url.hash;
+    window.location.replace(newhref);
+  }
+  // ]]>
+</script>
+<link href='https://www.webmanajemen.com' rel='canonical'/>
 
 <!-- Title -->
 <b:if cond='data:view.isHomepage'>

@@ -1,12 +1,13 @@
 "use strict";
 const Hexo = require("hexo");
+const { memoize } = require("underscore");
 
 /**
  * Check is production or development
  * @param {Hexo} inHexo
  * @returns
  */
-function getEnv(inHexo) {
+const getEnv = memoize(function (inHexo) {
   var DEV = "development";
   var PRD = "production";
 
@@ -20,16 +21,17 @@ function getEnv(inHexo) {
       }
     }
   }
+
   return null;
-}
+});
 
-function isDev(hexo) {
+const isDev = memoize(function (hexo) {
   return getEnv(hexo) == "development";
-}
+});
 
-function isProd(hexo) {
+const isProd = memoize(function (hexo) {
   return getEnv(hexo) == "production";
-}
+});
 
 module.exports = {
   env: function (inHexo) {
