@@ -8,12 +8,14 @@
       "command": "cd ../../ && hexo clean && hexo server --development",
       "name": "hexo clean server from ../../",
       "request": "launch",
+      "env": { "NODE_ENV": "development" },
       "type": "node-terminal"
     },
     {
       "command": "cd ../../ && hexo server --development",
       "name": "hexo server from ../../",
       "request": "launch",
+      "env": { "NODE_ENV": "development" },
       "type": "node-terminal"
     },
     {

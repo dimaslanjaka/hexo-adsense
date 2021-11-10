@@ -2,13 +2,10 @@
 "use strict";
 
 const injector2 = require("./packages/hexo-extend-injector2/index");
-const fs = require("hexo-fs");
+const fs = require("fs");
 const path = require("path");
-const checkLocalHost = require("./lib/checkLocalHost");
 const getConfig = require("./lib/config");
-const argv = require("yargs");
-const isProduction = argv["production"] !== undefined;
-const isDevelopment = argv["development"] !== undefined;
+const isDevelopment = require("./lib/config")(hexo).development;
 
 if (typeof hexo == "undefined") {
   console.log("[hexo-adsense] Not hexo process, skipping..");
@@ -20,11 +17,15 @@ if (typeof hexo != "undefined") {
   const config = getConfig(hexo);
 
   if (config.pub.length < 1) {
-    console.log(`adsense ca-pub (adsense.pub) not configured in _config.yml`);
+    hexo.log.debug(`adsense ca-pub (adsense.pub) not configured in _config.yml`);
     return;
   }
 
-  // only apply these function on remote
+  if (typeof hexo.env !== "undefined") {
+    console.log(hexo.env);
+  }
+
+  // only apply these function on production
   if (!isDevelopment) {
     //hexo.log.debug("is remote");
     // add redirect https
