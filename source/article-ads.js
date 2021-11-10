@@ -212,6 +212,11 @@ function shuffleArr(array) {
   return array;
 }
 
+/**
+ * Next generation of non-repeated randomizer
+ * @see {@link shuffleArr}
+ * @param {any[]} array
+ */
 function* shuffleArr2(array) {
   var i = array.length;
 
