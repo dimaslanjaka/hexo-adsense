@@ -59,9 +59,12 @@ if (typeof hexo != "undefined") {
     )}</script>`;
   });
 
-  /*injector.register("head-end", {
-    value: `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1165447249910969" crossorigin="anonymous"></script>`,
-  });*/
+  if (config.enable) {
+    // adsense enabled to all pages
+    injector.register("head-end", {
+      value: `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1165447249910969" crossorigin="anonymous"></script>`,
+    });
+  }
 
   if (typeof config.article_ads != "undefined") {
     /*
