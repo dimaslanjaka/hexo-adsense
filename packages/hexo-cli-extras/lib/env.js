@@ -11,6 +11,7 @@ function getEnv(inHexo) {
   var PRD = "production";
 
   if (inHexo) {
+    if (typeof inHexo.env.args.development == "boolean" && inHexo.env.args.development) return DEV;
     if (inHexo.env.args._ && inHexo.env.args._.length > 0) {
       for (var i = 0; i < inHexo.env.args._.length; i++) {
         if (inHexo.env.args._[i] == "s" || inHexo.env.args._[i] == "server") return DEV;
