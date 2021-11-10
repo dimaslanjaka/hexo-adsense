@@ -23,15 +23,17 @@ function getEnv(inHexo) {
 }
 
 function isDev(hexo) {
-  return getEnv(hexo) == 'development'
+  return getEnv(hexo) == "development";
 }
 
 function isProd(hexo) {
-  return getEnv(hexo) == 'production'
+  return getEnv(hexo) == "production";
 }
 
 module.exports = {
-  env = function (inHexo) {
+  env: function (inHexo) {
     return getEnv(inHexo);
-  }, isProd, isDev
-}
+  },
+  isProd,
+  isDev,
+};
