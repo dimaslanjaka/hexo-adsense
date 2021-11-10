@@ -34,18 +34,19 @@ function insertAfter(newElement, oldElement) {
  * @param {HTMLElement} oldElement
  */
 function replaceWith(newElement, oldElement) {
-  /*
   if (!oldElement.parentNode) {
     console.log(oldElement, "parent null");
     let d = document.createElement("div");
     d.appendChild(oldElement);
   } else {
+    //console.log(oldElement.parentNode.tagName);
     oldElement.parentNode.replaceChild(newElement, oldElement);
   }
-  */
+  /*
   try {
     oldElement.parentNode.replaceChild(newElement, oldElement);
   } catch (e) {}
+  */
 }
 
 let createElementFromHTML = function (htmlString) {
@@ -98,26 +99,6 @@ function newMethod() {
       let ads;
       let targetArticle = article.item(0);
 
-      /**
-       * auto ads on br
-       */
-      // eslint-disable-next-line no-unused-vars
-      const auto_br = function () {
-        let linebreak = targetArticle.querySelectorAll("br");
-        if (linebreak.length > 0) {
-          if (linebreak.length == 1) {
-            ads = adscont[0];
-            replaceWith(createElementFromHTML(ads), linebreak.item(0));
-          } else {
-            for (let index = 0; index < adscont.length; index++) {
-              ads = adscont[index];
-              replaceWith(createElementFromHTML(ads), linebreak.item(ranumb(0, linebreak.length)));
-            }
-          }
-          adshide.remove();
-        }
-      };
-
       // prioritize hexo-adsense-fill before auto ads on other elements
       const ads_fill = targetArticle.querySelectorAll("*[hexo-adsense-fill]");
       if (ads_fill.length > 0) {
@@ -133,7 +114,7 @@ function newMethod() {
       adscont = adshide.querySelectorAll('[hexo-adsense="ads-content"]');
       //console.log(adscont.length, "ads left");
       if (adscont.length > 0) {
-        const headers = targetArticle.querySelectorAll("h1,h2,h3,h4,h5,h6,hr");
+        const headers = targetArticle.querySelectorAll("h1,h2,h3,h4,h5,h6");
         if (headers.length > 0) {
           // generate index of headers
           let headers_index = Array.apply(null, { length: headers.length }).map(Number.call, Number);
@@ -152,18 +133,26 @@ function newMethod() {
       // the rest of the ads will show automatically to linebreak elements
       adscont = adshide.querySelectorAll('[hexo-adsense="ads-content"]');
       if (adscont.length > 0) {
-        const linebreaks = targetArticle.querySelectorAll("h1,h2,h3,h4,h5,h6,hr");
+        const linebreaks = targetArticle.querySelectorAll("br,hr");
         if (linebreaks.length > 0) {
           // generate index of linebreaks
           let linebreaks_index = Array.apply(null, { length: linebreaks.length }).map(Number.call, Number);
           //console.log(linebreaks_index);
+          // randomize linebreaks index
+          const rlinebreaks = shuffleArr2(linebreaks_index);
           for (let index = 0; index < adscont.length; index++) {
             ads = adscont[index];
-            const rlinebreaks = shuffleArr2(linebreaks_index);
             // pick a random index
             const rlinebreak = rlinebreaks.next().value;
-            const linebreak = linebreaks.item(rlinebreak);
-            replaceWith(createElementFromHTML(ads), linebreak);
+            if (typeof rlinebreak == "number") {
+              const linebreak = linebreaks.item(rlinebreak);
+              if (["blockquote", "img", "a"].includes(linebreak.parentNode.tagName.toLowerCase())) {
+                index--;
+                continue;
+              }
+              console.log(linebreak.tagName);
+              replaceWith(createElementFromHTML(ads), linebreak);
+            }
           }
         }
       }

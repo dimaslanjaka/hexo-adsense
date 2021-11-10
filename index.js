@@ -6,6 +6,7 @@ const fs = require("fs");
 const path = require("path");
 const getConfig = require("./lib/config");
 const isDevelopment = require("./lib/config")(hexo).development;
+const assign = require("object-assign");
 
 if (typeof hexo == "undefined") {
   //console.log("[hexo-adsense] Not hexo process, skipping..");
@@ -19,10 +20,6 @@ if (typeof hexo != "undefined") {
   if (config.pub.length < 1) {
     hexo.log.debug(`adsense ca-pub (adsense.pub) not configured in _config.yml`);
     return;
-  }
-
-  if (typeof hexo.env !== "undefined") {
-    //console.log(hexo.env);
   }
 
   // only apply these function on production
@@ -51,7 +48,11 @@ if (typeof hexo != "undefined") {
   }
 
   injector.register("head_end", function () {
-    return `<script id="hexo-adsense-config" type="application/json">${JSON.stringify(config, null, 2)}</script>`;
+    return `<script id="hexo-adsense-config" type="application/json">${JSON.stringify(
+      assign(config, hexo.env),
+      null,
+      2
+    )}</script>`;
   });
 
   /*injector.register("head-end", {
