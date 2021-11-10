@@ -39,9 +39,9 @@ adsense:
      data-ad-format="fluid"
      data-ad-client="ca-pub-xxxxx"
      data-ad-slot="xxxxx"></ins>
-<script>
+<!--script> UNUSED BECAUSE THIS PLUGIN ALREADY OPTIMIZED THE ADSENSE JAVASCRIPT
      (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+</script-->
 ```
 
 # disable options
