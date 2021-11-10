@@ -150,7 +150,7 @@ function newMethod() {
                 index--;
                 continue;
               }
-              console.log(linebreak.tagName);
+              //console.log(linebreak.tagName);
               replaceWith(createElementFromHTML(ads), linebreak);
             }
           }
