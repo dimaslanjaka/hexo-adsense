@@ -11,7 +11,7 @@ if (isBrowser()) {
  * @type {import("../lib/config")}
  */
 const hexoAdsenseConfig = JSON.parse(document.getElementById("hexo-adsense-config").textContent);
-console.log(hexoAdsenseConfig);
+//console.log(hexoAdsenseConfig);
 
 /**
  * Insert after element
@@ -130,8 +130,8 @@ if (article.length > 0 && adscont.length > 0) {
       }
     }
     //adshide.remove();
-    adscont = adshide.querySelectorAll('[hexo-adsense="ads-content"]');
-    console.log(adscont.length, "ads left");
+    //adscont = adshide.querySelectorAll('[hexo-adsense="ads-content"]');
+    //console.log(adscont.length, "ads left");
   } else {
     console.log("webpage is not post");
   }
@@ -167,7 +167,7 @@ if (!isBrowser()) {
       callback({ eventStatus: "tcloaded", gdprApplies: false }, true);
     }
   };
-  for (let index = 0; index < adscont.length; index++) {
+  for (let index = 0; index < document.querySelectorAll('[hexo-adsense="ads-content"]').length; index++) {
     (adsbygoogle = window.adsbygoogle || []).push({
       google_ad_client: hexoAdsenseConfig.pub,
     });
