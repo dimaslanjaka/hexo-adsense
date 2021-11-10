@@ -7,6 +7,10 @@ const path = require("path");
 const getConfig = require("./lib/config");
 const isDevelopment = require("./lib/config")(hexo).development;
 const assign = require("object-assign");
+const log = require("hexo-log")({
+  debug: false,
+  silent: false,
+});
 
 if (typeof hexo == "undefined") {
   //console.log("[hexo-adsense] Not hexo process, skipping..");
@@ -18,13 +22,13 @@ if (typeof hexo != "undefined") {
   const config = getConfig(hexo);
 
   if (config.pub.length < 1) {
-    hexo.log.debug(`adsense ca-pub (adsense.pub) not configured in _config.yml`);
+    log.error(`adsense ca-pub (adsense.pub) not configured in _config.yml`);
     return;
   }
 
   // only apply these function on production
   if (!isDevelopment) {
-    //hexo.log.debug("is remote");
+    //log.debug("is remote");
     // add redirect https
     if (typeof config.https == "boolean") {
       if (config.https) {
@@ -72,10 +76,15 @@ if (typeof hexo != "undefined") {
     });
     */
 
+    //log.log("hexo-adsense article ads process starting...");
     if (config.field === "post") {
-      hexo.extend.filter.register("after_post_render", require("./lib/article-ads").injectAdsContent);
+      // only on post
+      //log.log("after_post_render");
+      hexo.extend.filter.register("after_post_render", require("./lib/article-ads").after_post_render);
     } else {
-      hexo.extend.filter.register("after_render:html", require("./lib/article-ads").injectAdsContent);
+      //log.log("after_render:html");
+      // entire html
+      hexo.extend.filter.register("after_render:html", require("./lib/article-ads").after_render_html);
     }
   }
 }
