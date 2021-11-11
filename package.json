@@ -1,12 +1,13 @@
 {
   "name": "hexo-adsense",
-  "version": "0.0.1-dev",
+  "version": "0.0.3",
   "description": "Hexo adsense support",
   "main": "index.js",
   "scripts": {
     "lint": "eslint --ext .js,.jsx,.ts,.d.ts,.tsx ./",
     "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.d.ts,.tsx ./",
-    "test": "cd ../../ && hexo server"
+    "test": "cd ../../ && hexo server",
+    "prepare": "cd packages/hexo-blogger-xml && npm install"
   },
   "keywords": [],
   "author": "",
@@ -14,12 +15,15 @@
   "dependencies": {
     "bluebird": "^3.7.2",
     "eslint": "^7.32.0",
+    "eslint-plugin-ejs": "^0.0.2",
     "hexo": "^5.4.0",
     "hexo-cli-extras": "file:packages/hexo-cli-extras",
     "hexo-extend-injector2": "file:packages/hexo-extend-injector2",
     "hexo-fs": "^3.1.0",
+    "hexo-log": "^3.0.0",
     "md5-file": "^4.0.0",
     "minimatch": "^3.0.4",
+    "moment": "^2.29.1",
     "object-assign": "^4.1.1",
     "underscore": "^1.13.1"
   },
