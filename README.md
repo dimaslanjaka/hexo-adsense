@@ -1,6 +1,16 @@
 # hexo-adsense
 Hexo adsense support (under development)
 
+# Installation
+Using Git Repository (Development)
+```shell
+npm i git+https://github.com/dimaslanjaka/hexo-adsense.git
+```
+Using NPM Repository (Production)
+```shell
+npm i hexo-adsense
+```
+
 ### _config.yml
 ```yaml
 adsense:
