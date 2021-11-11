@@ -1,6 +1,10 @@
 # hexo-adsense
 Hexo adsense support (under development)
 
+# Features
+- can display adsense to all pages except specific posts or pages (multiple supported)
+- can only display adsense to specific posts or pages
+
 # Installation
 Using Git Repository (Development)
 ```shell
