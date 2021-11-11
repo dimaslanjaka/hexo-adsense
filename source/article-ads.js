@@ -91,12 +91,12 @@ function newMethod() {
   let adscont = adshide.querySelectorAll('[hexo-adsense="ads-content"]');
   const article = document.querySelectorAll("article");
   if (article.length > 0 && adscont.length > 0) {
+    /**
+     * @type {HTMLElement}
+     */
+    let ads;
     if (article.length == 1) {
       console.log("webpage is post");
-      /**
-       * @type {HTMLElement}
-       */
-      let ads;
       let targetArticle = article.item(0);
 
       // prioritize hexo-adsense-fill before auto ads on other elements
@@ -124,8 +124,10 @@ function newMethod() {
             const rheaders = shuffleArr2(headers_index);
             // pick a random index
             const rheader = rheaders.next().value;
-            const header = headers.item(rheader);
-            insertAfter(createElementFromHTML(ads), header);
+            if (typeof rheader === "number") {
+              const header = headers.item(rheader);
+              insertAfter(createElementFromHTML(ads), header);
+            }
           }
         }
       }
@@ -158,6 +160,20 @@ function newMethod() {
       }
     } else {
       console.log("webpage is not post");
+      // generate index of articles
+      let articles_index = Array.apply(null, { length: article.length }).map(Number.call, Number);
+      // randomize linebreaks index
+      const rArticles = shuffleArr2(articles_index);
+      for (let index = 0; index < adscont.length; index++) {
+        ads = adscont[index];
+        // pick a random index
+        const rArticle = rArticles.next().value;
+        if (typeof rArticle == "number") {
+          //console.log("adsense display to article index", rArticle);
+          const pickArticle = article.item(rArticle);
+          pickArticle.appendChild(createElementFromHTML(ads));
+        }
+      }
     }
 
     // summon adsbygoogle.push()
