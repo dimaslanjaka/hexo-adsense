@@ -33,3 +33,9 @@
 - 9de7933 : Update release 0.0.8
 - c04e3f0 : change source
 - 71646c9 : remove submodule
+
+## [0.0.11] November 11, 2021
+- 401d1d6 : remove prepare script
+- 9de7933 : Update release 0.0.8
+- c04e3f0 : change source
+- 71646c9 : remove submodule
