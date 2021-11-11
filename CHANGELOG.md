@@ -19,3 +19,11 @@
 -9de7933 : Update release 0.0.8
 -c04e3f0 : change source
 -71646c9 : remove submodule
+
+## [0.0.9] November 11, 2021
+-edeb9aa : update docs
+-d53f764 : Update docs
+-a523b6a : Update docs
+-9de7933 : Update release 0.0.8
+-c04e3f0 : change source
+-71646c9 : remove submodule
