@@ -60,7 +60,7 @@ function updateChangelog(callback) {
     const date = Moment().format("LL");
     let build = `\n\n## [${packages.version}] ${date}\n`;
     std.forEach((str) => {
-      build += `-${str}\n`;
+      build += `- ${str}\n`;
     });
 
     const changelog = join(__dirname, "CHANGELOG.md");
