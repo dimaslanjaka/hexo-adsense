@@ -1,6 +1,6 @@
 const { exec } = require("child_process");
 const { writeFileSync, readFileSync } = require("fs");
-const versionParser = require("./packages/hexo-blogger-xml/src/parser/versionParser");
+const versionParser = require("./lib/versionParser");
 const readline = require("readline");
 const rl = readline.createInterface(process.stdin, process.stdout);
 const packages = require("./package.json");

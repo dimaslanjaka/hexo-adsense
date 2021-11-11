@@ -1,4 +1,0 @@
-[submodule "packages/hexo-blogger-xml"]
-	path = packages/hexo-blogger-xml
-	url = https://github.com/dimaslanjaka/hexo-blogger-xml.git
-	branch = compiler
