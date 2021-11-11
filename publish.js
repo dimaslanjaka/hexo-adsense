@@ -8,8 +8,6 @@ const version = new versionParser(packages.version);
 const Moment = require("moment");
 const { join } = require("path");
 
-return updateChangelog();
-
 if (typeof version == "object") {
   rl.question("Overwrite? [yes]/no: ", function (answer) {
     if ((answer.toLowerCase() === "no") | (answer.toLowerCase() === "n")) {
