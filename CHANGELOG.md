@@ -27,3 +27,9 @@
 - 9de7933 : Update release 0.0.8
 - c04e3f0 : change source
 - 71646c9 : remove submodule
+
+## [0.0.10] November 11, 2021
+- d15ac4e : fix memory cache stategy
+- 9de7933 : Update release 0.0.8
+- c04e3f0 : change source
+- 71646c9 : remove submodule
