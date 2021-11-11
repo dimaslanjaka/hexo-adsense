@@ -6,8 +6,7 @@
   "scripts": {
     "lint": "eslint --ext .js,.jsx,.ts,.d.ts,.tsx ./",
     "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.d.ts,.tsx ./",
-    "test": "cd ../../ && hexo server",
-    "prepare": "cd packages/hexo-blogger-xml && npm install"
+    "test": "cd ../../ && hexo server"
   },
   "keywords": [
     "hexo",
