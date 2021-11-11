@@ -39,3 +39,12 @@
 - 9de7933 : Update release 0.0.8
 - c04e3f0 : change source
 - 71646c9 : remove submodule
+
+## [0.0.12] November 11, 2021
+- 61083bd : fix field post
+- ad63157 : reduce filter_adshtml arguments
+- 781737a : fix hexo unparsed
+- 66913e9 : +advance filtering and cache strategy
+- 9de7933 : Update release 0.0.8
+- c04e3f0 : change source
+- 71646c9 : remove submodule
