@@ -62,7 +62,7 @@ if (typeof hexo != "undefined") {
   if (config.enable) {
     // adsense enabled to all pages
     injector.register("head-end", {
-      value: `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1165447249910969" crossorigin="anonymous"></script>`,
+      value: `<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1165447249910969" crossorigin="anonymous"></script>`,
     });
   }
 

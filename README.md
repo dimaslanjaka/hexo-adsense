@@ -34,7 +34,7 @@ adsense:
 > `source/ads/in_article.html` contents
 ```html
 <!--REMOVE ADSENSE SCRIPT, THIS PLUGIN ALREADY OPTIMIZED THE ADSENSE JAVASCRIPT-->
-<!--<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxx" crossorigin="anonymous"></script>-->
+<!--<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxx" crossorigin="anonymous"></script>-->
 <ins class="adsbygoogle"
      style="display:block; text-align:center;"
      data-ad-layout="in-article"

@@ -4164,7 +4164,7 @@ var relatedPostConfig = {
   <b:section class='iklan-atas' id='iklan-atas' maxwidgets='1' showaddelement='yes'>
     <b:widget id='HTML996' locked='true' title='Iklan Atas Artikel' type='HTML' version='1'>
       <b:widget-settings>
-        <b:widget-setting name='content'>&lt;script async src=&quot;https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&quot;&gt;&lt;/script&gt;
+        <b:widget-setting name='content'>&lt;script async src=&quot;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&quot;&gt;&lt;/script&gt;
 &lt;ins class=&quot;adsbygoogle&quot;
      style=&quot;display:block; text-align:center;&quot;
      data-ad-layout=&quot;in-article&quot;
@@ -4191,7 +4191,7 @@ var relatedPostConfig = {
   <b:section class='iklan-tengah1' id='iklan-tengah1' maxwidgets='1' showaddelement='yes'>
     <b:widget id='HTML997' locked='true' title='Iklan Tengah Artikel 1' type='HTML' version='1'>
       <b:widget-settings>
-        <b:widget-setting name='content'>&lt;script async src=&quot;https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&quot;&gt;&lt;/script&gt;
+        <b:widget-setting name='content'>&lt;script async src=&quot;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&quot;&gt;&lt;/script&gt;
 &lt;!-- Auto Square --&gt;
 &lt;ins class=&quot;adsbygoogle&quot;
      style=&quot;display:block&quot;
@@ -4219,7 +4219,7 @@ var relatedPostConfig = {
   <b:section class='iklan-tengah2' id='iklan-tengah2' maxwidgets='1' showaddelement='yes'>
     <b:widget id='HTML998' locked='true' title='Iklan Tengah Artikel 2' type='HTML' version='1'>
       <b:widget-settings>
-        <b:widget-setting name='content'>&lt;script async src=&quot;https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&quot;&gt;&lt;/script&gt;
+        <b:widget-setting name='content'>&lt;script async src=&quot;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&quot;&gt;&lt;/script&gt;
 &lt;!-- Auto Square --&gt;
 &lt;ins class=&quot;adsbygoogle&quot;
      style=&quot;display:block&quot;
@@ -4247,7 +4247,7 @@ var relatedPostConfig = {
   <b:section class='iklan-bawah' id='iklan-bawah' maxwidgets='1' showaddelement='yes'>
     <b:widget id='HTML999' locked='true' title='Iklan Bawah Artikel' type='HTML' version='1'>
       <b:widget-settings>
-        <b:widget-setting name='content'>&lt;script async src=&quot;https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&quot;&gt;&lt;/script&gt;
+        <b:widget-setting name='content'>&lt;script async src=&quot;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&quot;&gt;&lt;/script&gt;
 &lt;ins class=&quot;adsbygoogle&quot;
      style=&quot;display:block; text-align:center;&quot;
      data-ad-layout=&quot;in-article&quot;
