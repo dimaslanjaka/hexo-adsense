@@ -9,9 +9,19 @@
     "test": "cd ../../ && hexo server",
     "prepare": "cd packages/hexo-blogger-xml && npm install"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "hexo",
+    "auto",
+    "adsense",
+    "in-article-ads"
+  ],
+  "author": {
+    "name": "Dimas Lanjaka",
+    "email": "dimaslanjaka@gmail.com",
+    "url": "https://github.com/dimaslanjaka"
+  },
   "license": "ISC",
+  "repository": "dimaslanjaka/hexo-adsense",
   "dependencies": {
     "bluebird": "^3.7.2",
     "eslint": "^7.32.0",
