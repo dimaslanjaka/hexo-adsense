@@ -54,3 +54,10 @@
 - 9de7933 : Update release 0.0.8
 - c04e3f0 : change source
 - 71646c9 : remove submodule
+
+## [0.0.14] November 12, 2021
+- 2288565 : +cache
+- 26ddbb2 : fix adsense not display on archives etc
+- 9de7933 : Update release 0.0.8
+- c04e3f0 : change source
+- 71646c9 : remove submodule
