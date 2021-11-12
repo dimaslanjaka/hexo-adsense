@@ -61,3 +61,9 @@
 - 9de7933 : Update release 0.0.8
 - c04e3f0 : change source
 - 71646c9 : remove submodule
+
+## [0.0.15] November 13, 2021
+- 12fc85f : fix adsense not showing on posts
+- 9de7933 : Update release 0.0.8
+- c04e3f0 : change source
+- 71646c9 : remove submodule
