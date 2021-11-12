@@ -1,5 +1,7 @@
 # hexo-adsense
-Hexo adsense support (under development)
+Hexo adsense support
+
+> development finished on 12 November 2021
 
 # Features
 - can display adsense to all pages except specific posts or pages (multiple supported)
