@@ -48,3 +48,9 @@
 - 9de7933 : Update release 0.0.8
 - c04e3f0 : change source
 - 71646c9 : remove submodule
+
+## [0.0.13] November 12, 2021
+- 1100087 : fix adsense injected on non-html files
+- 9de7933 : Update release 0.0.8
+- c04e3f0 : change source
+- 71646c9 : remove submodule
