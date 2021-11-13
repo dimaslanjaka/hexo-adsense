@@ -34,7 +34,8 @@ if (typeof version == "object") {
 }
 
 function updateChangelog(callback) {
-  exec('git log --reflog --pretty=format:"%h : %s" --not --remotes', (err, stdout, stderr) => {
+  // git log --reflog --not --remotes --pretty=format:"%h : %s %ad"
+  exec('git log --reflog --pretty=format:"%h : %s %b %ad" --not --remotes', (err, stdout, stderr) => {
     const std = stdout
       .split("\n")
       .filter(

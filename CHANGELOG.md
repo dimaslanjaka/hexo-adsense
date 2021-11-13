@@ -67,3 +67,12 @@
 - 9de7933 : Update release 0.0.8
 - c04e3f0 : change source
 - 71646c9 : remove submodule
+
+## [0.0.16] November 13, 2021
+- 2102d6e : add pre selector on header process source/article-ads.js:113
+- Sat Nov 13 17:02:53 2021 +0700
+- 1e3c150 : fix adsense displayed on em,strong  Sat Nov 13 16:56:02 2021 +0700
+- 63edb45 : fix adsense displayed inside <pre>/<code>  Sat Nov 13 16:44:29 2021 +0700
+- 9de7933 : Update release 0.0.8  Thu Nov 11 19:42:53 2021 +0700
+- c04e3f0 : change source  Thu Nov 11 19:42:39 2021 +0700
+- 71646c9 : remove submodule  Thu Nov 11 19:42:15 2021 +0700
