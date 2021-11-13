@@ -148,7 +148,11 @@ function newMethod() {
             const rlinebreak = rlinebreaks.next().value;
             if (typeof rlinebreak == "number") {
               const linebreak = linebreaks.item(rlinebreak);
-              if (["blockquote", "img", "a", "pre", "code"].includes(linebreak.parentNode.tagName.toLowerCase())) {
+              if (
+                ["blockquote", "img", "a", "pre", "code", "em", "strong"].includes(
+                  linebreak.parentNode.tagName.toLowerCase()
+                )
+              ) {
                 index--;
                 continue;
               }
