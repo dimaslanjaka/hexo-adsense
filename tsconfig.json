@@ -18,7 +18,8 @@
     // Removing this would place the .d.ts files
     // next to the .js files
     "outDir": "lib",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "resolveJsonModule": true
   },
   "exclude": [
     "**/node_modules/**"

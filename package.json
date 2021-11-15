@@ -1,6 +1,6 @@
 {
   "name": "hexo-adsense",
-  "version": "0.0.20",
+  "version": "1.0.20",
   "description": "Hexo adsense support",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -10,6 +10,10 @@
     "copy-files": "copyfiles -u 1 source/**/*.{html,css,js} lib/source/",
     "build": "rm -rf lib && tsc && npm run copy-files"
   },
+  "files": [
+    "lib",
+    "*.md"
+  ],
   "keywords": [
     "hexo",
     "auto",
