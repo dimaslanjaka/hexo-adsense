@@ -112,4 +112,4 @@ tags:
 
 ## Project with this package
 [![GitHub](https://badgen.net/badge/icon/github?icon=github&label)](https://github.com/dimaslanjaka/dimaslanjaka.github.io/tree/compiler) |
-[dimaslanjaka.github.io](https://dimaslanjaka.github.io)
+[dimaslanjaka.github.io](https://dimaslanjaka.github.io) [![Website dimaslanjaka.github.io](https://img.shields.io/website-up-down-green-red/http/dimaslanjaka.github.io.svg)](https://dimaslanjaka.github.io)
