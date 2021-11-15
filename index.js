@@ -51,11 +51,13 @@ if (!isDevelopment) {
 }
 
 injector.register("head_end", function () {
-  return `<script id="hexo-adsense-config" type="application/json">${JSON.stringify(
-    assign(config, hexo.env),
-    null,
-    2
-  )}</script>`;
+  let adsenseConfigObject;
+  if (isDevelopment) {
+    adsenseConfigObject = JSON.stringify(assign(config, hexo.env), null, 2);
+  } else {
+    adsenseConfigObject = JSON.stringify(assign(config, hexo.env));
+  }
+  return `<script id="hexo-adsense-config" type="application/json">${adsenseConfigObject}</script>`;
 });
 
 if (config.enable) {
