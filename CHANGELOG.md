@@ -96,3 +96,9 @@
 
 ## [1.0.22] 2021-11-15T23:00:52
 - 9ad891e : update browser config  Mon Nov 15 23:00:25 2021 +0700
+
+## [1.0.23] 2021-11-15T23:51:55
+- c5fcbc5 : update packaging  Mon Nov 15 23:51:33 2021 +0700
+- 9de7933 : Update release 0.0.8  Thu Nov 11 19:42:53 2021 +0700
+- c04e3f0 : change source  Thu Nov 11 19:42:39 2021 +0700
+- 71646c9 : remove submodule  Thu Nov 11 19:42:15 2021 +0700
