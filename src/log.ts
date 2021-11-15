@@ -1,4 +1,5 @@
-const log = require("hexo-log")({
+import hexoLog from "hexo-log";
+const log = hexoLog({
   debug: false,
   silent: false,
 });

@@ -4,8 +4,8 @@
 const injector2 = require("./packages/hexo-extend-injector2/index");
 const fs = require("fs");
 const path = require("path");
-const getConfig = require("./lib/config");
-const isDevelopment = require("./lib/config")(hexo).development;
+const getConfig = require("./src/config");
+const isDevelopment = require("./src/config")(hexo).development;
 const assign = require("object-assign");
 const log = require("hexo-log")({
   debug: false,
@@ -82,10 +82,10 @@ if (typeof config.article_ads != "undefined") {
   if (config.field === "post") {
     // only on post
     //log.log("after_post_render");
-    hexo.extend.filter.register("after_post_render", require("./lib/article-ads").after_post_render);
+    hexo.extend.filter.register("after_post_render", require("./src/article-ads").after_post_render);
   } else {
     //log.log("after_render:html");
     // entire html
-    hexo.extend.filter.register("after_render:html", require("./lib/article-ads").after_render_html);
+    hexo.extend.filter.register("after_render:html", require("./src/article-ads").after_render_html);
   }
 }

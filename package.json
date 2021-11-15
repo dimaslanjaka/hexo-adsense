@@ -1,8 +1,9 @@
 {
   "name": "hexo-adsense",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "Hexo adsense support",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "lint": "eslint --ext .js,.jsx,.ts,.d.ts,.tsx ./",
     "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.d.ts,.tsx ./",

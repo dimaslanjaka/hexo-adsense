@@ -5,7 +5,7 @@
 const isBrowser = new Function("try {return this===window;}catch(e){ return false;}");
 
 /**
- * @type {import("../lib/config")}
+ * @type {import("../src/config")}
  */
 const hexoAdsenseConfig = JSON.parse(document.getElementById("hexo-adsense-config").textContent);
 //console.log(hexoAdsenseConfig);
