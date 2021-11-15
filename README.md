@@ -5,8 +5,7 @@ Hexo adsense support
 
 [![Website shields.io](https://img.shields.io/website-up-down-green-red/https/webmanajemen.com.svg)](https://webmanajemen.com/)
 [![Npm package yearly downloads](https://badgen.net/npm/dy/hexo-adsense)](https://npmjs.com/package/hexo-adsense)
-[![Minimum node.js version](https://badgen.net/npm/node/hexo-adsense)](https://npmjs.com/package/hexo-adsense)
-[![Npm package dependents](https://badgen.net/npm/dependents/hexo-adsense)](https://npmjs.com/package/hexo-adsense)
+[![Minimum node.js version](https://badgen.net/npm/node/hexo-adsense)](https://npmjs.com/package/hexo-adsense) 
 
 # Features
 - can display adsense to all pages except specific posts or pages (multiple supported)
