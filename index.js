@@ -12,7 +12,7 @@ const log = require("hexo-log")({
   silent: false,
 });
 
-if (typeof hexo == "undefined") {
+if (typeof hexo == "undefined" || typeof hexo.config.adsense == "undefined") {
   //console.log("[hexo-adsense] Not hexo process, skipping..");
   return;
 }
