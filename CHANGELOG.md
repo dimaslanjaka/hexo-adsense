@@ -76,3 +76,9 @@
 - 9de7933 : Update release 0.0.8  Thu Nov 11 19:42:53 2021 +0700
 - c04e3f0 : change source  Thu Nov 11 19:42:39 2021 +0700
 - 71646c9 : remove submodule  Thu Nov 11 19:42:15 2021 +0700
+
+## [0.0.17] November 15, 2021
+- baa50c6 : cancel adsense if config not defined  Mon Nov 15 13:29:53 2021 +0700
+- 9de7933 : Update release 0.0.8  Thu Nov 11 19:42:53 2021 +0700
+- c04e3f0 : change source  Thu Nov 11 19:42:39 2021 +0700
+- 71646c9 : remove submodule  Thu Nov 11 19:42:15 2021 +0700
