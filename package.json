@@ -7,8 +7,8 @@
   "scripts": {
     "lint": "eslint --ext .js,.jsx,.ts,.d.ts,.tsx ./",
     "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.d.ts,.tsx ./",
-    "copy-files": "copyfiles -u 1 source/**/*.{html,css} lib/",
-    "build": "tsc && npm run copy-files"
+    "copy-files": "copyfiles -u 1 source/**/*.{html,css,js} lib/source/",
+    "build": "rm -rf lib && tsc && npm run copy-files"
   },
   "keywords": [
     "hexo",
