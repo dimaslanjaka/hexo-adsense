@@ -11,6 +11,7 @@ Hexo adsense support
 - can display adsense to all pages except specific posts or pages (multiple supported)
 - can only display adsense to specific posts or pages
 - adsense javascript enchantments (lazy adsense included)
+- support display adsense on localhost
 
 # Installation
 Using Git Repository (Development)
