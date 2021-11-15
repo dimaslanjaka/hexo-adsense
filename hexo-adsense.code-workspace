@@ -7,5 +7,7 @@
 			"path": "../../source/guide"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"git.enabled": false
+	}
 }

@@ -7,7 +7,8 @@
   "scripts": {
     "lint": "eslint --ext .js,.jsx,.ts,.d.ts,.tsx ./",
     "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.d.ts,.tsx ./",
-    "test": "cd ../../ && hexo server"
+    "copy-files": "copyfiles -u 1 source/**/*.{html,css} lib/",
+    "build": "tsc && npm run copy-files"
   },
   "keywords": [
     "hexo",
@@ -24,8 +25,6 @@
   "repository": "dimaslanjaka/hexo-adsense",
   "dependencies": {
     "bluebird": "^3.7.2",
-    "eslint": "^7.32.0",
-    "eslint-plugin-ejs": "^0.0.2",
     "hexo": "^5.4.0",
     "hexo-cli-extras": "file:packages/hexo-cli-extras",
     "hexo-extend-injector2": "file:packages/hexo-extend-injector2",
@@ -39,6 +38,9 @@
   },
   "devDependencies": {
     "@types/jsdom": "^16.2.13",
+    "copyfiles": "github:calvinmetcalf/copyfiles",
+    "eslint": "^7.32.0",
+    "eslint-plugin-ejs": "^0.0.2",
     "jsdom": "^18.0.1"
   }
 }
