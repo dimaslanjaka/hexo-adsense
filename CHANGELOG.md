@@ -82,3 +82,11 @@
 
 ## [0.0.19] 2021-11-15T17:29:01
 - 98dc5fe : migrate using typescript compiler  Mon Nov 15 17:28:33 2021 +0700
+
+## [0.0.20] 2021-11-15T20:19:41
+- 6ecbcf3 : fix source files ENOENT  Mon Nov 15 20:19:05 2021 +0700
+- 2d12d3f : fix source files ENOENT  Mon Nov 15 20:18:56 2021 +0700
+- 6e6b4af : fix source css/js not found  Mon Nov 15 20:17:32 2021 +0700
+- 9de7933 : Update release 0.0.8  Thu Nov 11 19:42:53 2021 +0700
+- c04e3f0 : change source  Thu Nov 11 19:42:39 2021 +0700
+- 71646c9 : remove submodule  Thu Nov 11 19:42:15 2021 +0700
