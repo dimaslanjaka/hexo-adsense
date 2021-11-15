@@ -1,7 +1,12 @@
 # hexo-adsense
 Hexo adsense support
 
-> development finished on 12 November 2021
+> first development finished on 12 November 2021
+
+[![Website shields.io](https://img.shields.io/website-up-down-green-red/https/webmanajemen.com.svg)](https://webmanajemen.com/)
+[![Npm package yearly downloads](https://badgen.net/npm/dy/hexo-adsense)](https://npmjs.com/package/hexo-adsense)
+[![Minimum node.js version](https://badgen.net/npm/node/hexo-adsense)](https://npmjs.com/package/hexo-adsense)
+[![Npm package dependents](https://badgen.net/npm/dependents/hexo-adsense)](https://npmjs.com/package/hexo-adsense)
 
 # Features
 - can display adsense to all pages except specific posts or pages (multiple supported)
@@ -106,5 +111,5 @@ tags:
 ```
 
 ## Project with this package
-<a href="https://github.com/dimaslanjaka/dimaslanjaka.github.io/tree/compiler" alt="github">Github <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" width="20px" height="20px" /></a> |
+[![GitHub](https://badgen.net/badge/icon/github?icon=github&label)](https://github.com/dimaslanjaka/dimaslanjaka.github.io/tree/compiler) |
 [dimaslanjaka.github.io](https://dimaslanjaka.github.io)
