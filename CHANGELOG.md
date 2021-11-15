@@ -79,12 +79,6 @@
 
 ## [0.0.17] November 15, 2021
 - baa50c6 : cancel adsense if config not defined  Mon Nov 15 13:29:53 2021 +0700
-- 9de7933 : Update release 0.0.8  Thu Nov 11 19:42:53 2021 +0700
-- c04e3f0 : change source  Thu Nov 11 19:42:39 2021 +0700
-- 71646c9 : remove submodule  Thu Nov 11 19:42:15 2021 +0700
 
 ## [0.0.19] 2021-11-15T17:29:01
 - 98dc5fe : migrate using typescript compiler  Mon Nov 15 17:28:33 2021 +0700
-- 9de7933 : Update release 0.0.8  Thu Nov 11 19:42:53 2021 +0700
-- c04e3f0 : change source  Thu Nov 11 19:42:39 2021 +0700
-- 71646c9 : remove submodule  Thu Nov 11 19:42:15 2021 +0700
