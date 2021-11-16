@@ -9,7 +9,7 @@ declare function articleAds(files: string[], hexo: Hexo): string[];
  * @param {object} data
  * @param {string} content
  */
-export function after_render_html(content: string, data: object): any;
+export function after_render_html(content: string, data: object): string;
 /**
  * inject ads after_post_render event
  * @example

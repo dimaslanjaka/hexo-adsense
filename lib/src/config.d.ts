@@ -1,20 +1,13 @@
-declare function _exports(hexo: any): {
-    /**
-     * Enable adsense
-     */
-    enable: boolean;
-    article_ads: string[];
-    /**
-     * Adsense ca-pub
-     */
-    pub: string;
-    adblock: boolean;
-    https: boolean;
-    field: string;
-    exclude: string[];
-    /**
-     * is development mode?
-     */
-    development: boolean;
-};
+declare function _exports(hexo: Hexo): typeof defaultConfig;
 export = _exports;
+import Hexo = require("hexo");
+declare namespace defaultConfig {
+    const enable: boolean;
+    const article_ads: string[];
+    const pub: string;
+    const adblock: boolean;
+    const https: boolean;
+    const field: string;
+    const exclude: string[];
+    const development: boolean;
+}
