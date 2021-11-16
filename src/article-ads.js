@@ -131,7 +131,7 @@ function filter_adshtml(hexo) {
  * @param {Hexo} hexo hexo instances
  * @returns content html string
  */
-const filter_patterns = memoize(function (content, source_path, hexo) {
+const filter_patterns = function (content, source_path, hexo) {
   const options = require("./config")(hexo);
   let excluded = utils.isIgnore(source_path, options.exclude, hexo);
   // if `source_path` undefined, that is archive or tags
@@ -156,7 +156,7 @@ const filter_patterns = memoize(function (content, source_path, hexo) {
     content: content,
     excluded: excluded,
   };
-});
+}
 
 /**
  * inject ads after_post_render event

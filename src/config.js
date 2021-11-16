@@ -31,7 +31,7 @@ const defaultConfig = {
  * @param {Hexo} hexo
  * @returns {typeof defaultConfig}
  */
-module.exports = memoize(function (hexo) {
+module.exports = function (hexo) {
   if (hexo && typeof hexo.config.adsense != "undefined") {
     /**
      * @type {typeof defaultConfig}
@@ -42,4 +42,4 @@ module.exports = memoize(function (hexo) {
     return c;
   }
   return defaultConfig;
-});
+}

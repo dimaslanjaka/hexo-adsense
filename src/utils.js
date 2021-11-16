@@ -32,7 +32,7 @@ function setHexo(inHexo) {
  * @param {Hexo} hexo
  * @returns
  */
-const isIgnore = underscore.memoize((path0, exclude, hexo) => {
+const isIgnore = (path0, exclude, hexo) => {
   if (exclude && !Array.isArray(exclude)) exclude = [exclude];
 
   if (path0 && exclude && exclude.length) {
@@ -49,7 +49,7 @@ const isIgnore = underscore.memoize((path0, exclude, hexo) => {
     }
   }
   return false;
-});
+}
 
 function streamToString(stream) {
   return new Promise((resolve, reject) => {
