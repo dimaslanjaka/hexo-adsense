@@ -102,3 +102,10 @@
 - 9de7933 : Update release 0.0.8  Thu Nov 11 19:42:53 2021 +0700
 - c04e3f0 : change source  Thu Nov 11 19:42:39 2021 +0700
 - 71646c9 : remove submodule  Thu Nov 11 19:42:15 2021 +0700
+
+## [1.0.24] 2021-11-16T09:08:44
+- 62c0568 : reduce inMemory cache usage  Tue Nov 16 09:08:20 2021 +0700
+- 4116d6e : reduce in-memory cache usage  Tue Nov 16 09:07:31 2021 +0700
+- 9de7933 : Update release 0.0.8  Thu Nov 11 19:42:53 2021 +0700
+- c04e3f0 : change source  Thu Nov 11 19:42:39 2021 +0700
+- 71646c9 : remove submodule  Thu Nov 11 19:42:15 2021 +0700
