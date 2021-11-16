@@ -7,6 +7,10 @@ yarn-error.log*
 lerna-debug.log*
 tmp/
 
+# idea dynamic object
+.idea/vcs.xml
+.idea/workspace.xml
+
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 

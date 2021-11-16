@@ -2,8 +2,6 @@
 /* global hexo */
 const Hexo = require("hexo");
 const assign = require("object-assign");
-const { memoize } = require("underscore");
-const checkLocalHost = require("./checkLocalHost");
 const defaultConfig = {
   /**
    * Enable adsense
@@ -38,8 +36,8 @@ module.exports = function (hexo) {
      */
     const c = assign(defaultConfig, hexo.config.adsense);
     c.development = defaultConfig.development = require("../packages/hexo-cli-extras/lib/env").isDev(hexo);
-    //console.log(c);
+    ///////////console.log(c);
     return c;
   }
   return defaultConfig;
-}
+};
