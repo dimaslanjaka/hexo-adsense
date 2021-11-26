@@ -109,3 +109,12 @@
 - 9de7933 : Update release 0.0.8  Thu Nov 11 19:42:53 2021 +0700
 - c04e3f0 : change source  Thu Nov 11 19:42:39 2021 +0700
 - 71646c9 : remove submodule  Thu Nov 11 19:42:15 2021 +0700
+
+## [1.0.25] 2021-11-26T23:51:28
+- 8d42898 : Fix minifier  Fri Nov 26 23:47:04 2021 +0700
+- 11050f9 : reduce resources  Fri Nov 26 23:13:04 2021 +0700
+- a4ab023 : minify  Fri Nov 26 23:06:26 2021 +0700
+- 3a7f3ec : minify source  Fri Nov 26 22:23:39 2021 +0700
+- 9de7933 : Update release 0.0.8  Thu Nov 11 19:42:53 2021 +0700
+- c04e3f0 : change source  Thu Nov 11 19:42:39 2021 +0700
+- 71646c9 : remove submodule  Thu Nov 11 19:42:15 2021 +0700
