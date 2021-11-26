@@ -156,7 +156,7 @@ const filter_patterns = function (content, source_path, hexo) {
     content: content,
     excluded: excluded,
   };
-}
+};
 
 /**
  * inject ads after_post_render event
@@ -215,7 +215,7 @@ function processAdsHtml(content, adshtml, hexo) {
   const options = require("./config")(hexo);
   const replacement = memoize(function (adshtml) {
     const adsContentCss = __dirname.joinpath("../source/article-ads.css");
-    const adsContentJs = __dirname.joinpath("../source/article-ads.min.js");
+    const adsContentJs = __dirname.joinpath("../source/article-ads.js");
     let replacement = `<div id="hexo-adsense-hidden" style="display:none">${adshtml.join("")}</div>`;
     if (fs.existsSync(adsContentCss)) {
       replacement += `<style>${fs.readFileSync(adsContentCss).toString()}</style>`;
@@ -237,11 +237,11 @@ function processAdsHtml(content, adshtml, hexo) {
     // prevent duplicate onpage adsense in </head>
     if (!options.enable) {
       content = content.replace(
-        /<\/head\>/gm,
+        /<\/head>/gm,
         `<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${options.pub}" crossorigin="anonymous"></script>`
       );
     }
-    content = content.replace(/<\/body\>/gm, `${replacement(adshtml)}</body>`);
+    content = content.replace(/<\/body>/gm, `${replacement(adshtml)}</body>`);
   }
   return content;
 }
@@ -283,10 +283,10 @@ function after_render_html(content, data) {
   const options = require("./config")(hexo);
 
   let page;
-  if (data.hasOwnProperty("post")) {
+  if (data.post) {
     data.type = "post";
     page = data.post;
-  } else if (data.hasOwnProperty("page")) {
+  } else if (data.page) {
     data.type = "page";
     page = data.page;
   }

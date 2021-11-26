@@ -8,7 +8,7 @@
     "lint": "eslint --ext .js,.jsx,.ts,.d.ts,.tsx ./",
     "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.d.ts,.tsx ./",
     "copy-files": "copyfiles -u 1 source/**/*.{html,css,js} lib/source/",
-    "build": "rm -rf lib && tsc && npm run copy-files"
+    "build": "rm -rf lib && gulp"
   },
   "files": [
     "lib",
@@ -43,14 +43,22 @@
     "underscore": "^1.13.1"
   },
   "devDependencies": {
+    "@types/gulp-sourcemaps": "^0.0.35",
     "@typescript-eslint/parser": "^4.33.0",
     "copyfiles": "github:calvinmetcalf/copyfiles",
+    "del": "^6.0.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-prettier": "^4.0.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-terser": "^2.1.0",
     "jsdom": "^18.0.1",
     "prettier": "2.4.1",
+    "terser": "^5.10.0",
     "typescript": "^4.4.4"
   }
 }

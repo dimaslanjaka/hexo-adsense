@@ -15,10 +15,12 @@ module.exports = {
   ],
   overrides: [
     {
-      files: ["*.js", '*.jsx', "bin/*"],
+      files: ["*.js", "*.jsx", "bin/*"],
       rules: {
         "@typescript-eslint/no-var-requires": "off",
         "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/triple-slash-reference": "off",
+        "@typescript-eslint/no-this-alias": "off",
       },
     },
   ],
