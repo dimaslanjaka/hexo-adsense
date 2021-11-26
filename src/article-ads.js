@@ -215,7 +215,7 @@ function processAdsHtml(content, adshtml, hexo) {
   const options = require("./config")(hexo);
   const replacement = memoize(function (adshtml) {
     const adsContentCss = __dirname.joinpath("../source/article-ads.css");
-    const adsContentJs = __dirname.joinpath("../source/article-ads.js");
+    const adsContentJs = __dirname.joinpath("../source/article-ads.min.js");
     let replacement = `<div id="hexo-adsense-hidden" style="display:none">${adshtml.join("")}</div>`;
     if (fs.existsSync(adsContentCss)) {
       replacement += `<style>${fs.readFileSync(adsContentCss).toString()}</style>`;
