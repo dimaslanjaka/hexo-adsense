@@ -6,6 +6,7 @@ import cleanCSS from "gulp-clean-css";
 import sourcemaps from "gulp-sourcemaps";
 import del from "del";
 import { exec } from "child_process";
+import htmlmin from "gulp-html-minifier-terser";
 
 function tsc(cb) {
   exec("tsc", function (err, stdout, stderr) {
@@ -38,4 +39,11 @@ function clean() {
   return del(["./lib"]);
 }
 
-exports.default = gulp.series(clean, es, css, tsc);
+function html() {
+  return gulp
+    .src("source/*.html")
+    .pipe(htmlmin({ collapseWhitespace: true, minifyJS: true, minifyCSS: true, preserveLineBreaks: true }))
+    .pipe(gulp.dest("./lib/source"));
+}
+
+exports.default = gulp.series(clean, es, css, html, tsc);
