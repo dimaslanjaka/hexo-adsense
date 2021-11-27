@@ -118,3 +118,9 @@
 - 9de7933 : Update release 0.0.8  Thu Nov 11 19:42:53 2021 +0700
 - c04e3f0 : change source  Thu Nov 11 19:42:39 2021 +0700
 - 71646c9 : remove submodule  Thu Nov 11 19:42:15 2021 +0700
+
+## [1.0.26] 2021-11-27T10:27:27
+- a2e2b44 : Fix update  Sat Nov 27 10:26:47 2021 +0700
+- 9de7933 : Update release 0.0.8  Thu Nov 11 19:42:53 2021 +0700
+- c04e3f0 : change source  Thu Nov 11 19:42:39 2021 +0700
+- 71646c9 : remove submodule  Thu Nov 11 19:42:15 2021 +0700
