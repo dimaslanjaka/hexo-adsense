@@ -9,6 +9,9 @@ Hexo adsense support
 - adsense javascript enchantments (lazy adsense included)
 - support display adsense on localhost
 
+# Demo
+[My Blog](https://www.webmanajemen.com/NodeJS/eslint-prettier-typescript-vscode.html) try reload page. ads should be automated display in random positions of pseudo html elements (such as header, new line `<br/>`, after pretext `<pre/>`).
+
 # Installation
 Using Git Repository (Development)
 ```shell
