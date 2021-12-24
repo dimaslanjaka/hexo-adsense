@@ -1,3 +1,7 @@
 [submodule "packages/@types"]
 	path = packages/@types
 	url = https://github.com/dimaslanjaka/nodejs-package-types
+[submodule "test/demo"]
+	path = test/demo
+	url = https://github.com/dimaslanjaka/site.git
+	branch = test-demo
