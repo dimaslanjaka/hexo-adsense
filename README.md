@@ -24,6 +24,7 @@ npm i hexo-adsense
 
 ### _config.yml
 ```yaml
+# https://github.com/dimaslanjaka/hexo-adsense
 adsense:
   # enable(true) or disable(false)
   enable: true
