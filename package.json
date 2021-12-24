@@ -29,7 +29,6 @@
   "repository": "dimaslanjaka/hexo-adsense",
   "dependencies": {
     "bluebird": "^3.7.2",
-    "hexo": "^5.4.0",
     "hexo-cli-extras": "file:packages/hexo-cli-extras",
     "hexo-extend-injector2": "file:packages/hexo-extend-injector2",
     "hexo-fs": "^3.1.0",
@@ -43,6 +42,7 @@
   },
   "devDependencies": {
     "@types/gulp-sourcemaps": "^0.0.35",
+    "@types/hexo": "file:packages/@types/hexo",
     "@typescript-eslint/parser": "^4.33.0",
     "del": "^6.0.0",
     "eslint": "^7.32.0",

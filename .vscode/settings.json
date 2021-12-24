@@ -2,7 +2,6 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "editor.formatOnSave": false,
   "files.exclude": {
     "**/.git": true,
     "**/.svn": true,
@@ -23,5 +22,12 @@
   },
   "git.detectSubmodules": true,
   "javascript.suggestionActions.enabled": false,
-  "typescript.suggestionActions.enabled": false
+  "typescript.suggestionActions.enabled": false,
+  "[typescript]": {
+    "editor.formatOnSave": false
+  },
+  "[javascript]": {
+    "editor.maxTokenizationLineLength": 2500,
+    "editor.formatOnSave": false
+  }
 }

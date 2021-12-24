@@ -19,7 +19,13 @@
     // next to the .js files
     "outDir": "lib",
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "noImplicitAny": false,
+    "noUnusedLocals": false,
+    "noImplicitThis": false
   },
   "exclude": [
     "**/node_modules/**"
