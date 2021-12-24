@@ -44,10 +44,10 @@ function replaceWith(newElement, oldElement) {
     oldElement.parentNode.replaceChild(newElement, oldElement);
   }
   /*
-  try {
-    oldElement.parentNode.replaceChild(newElement, oldElement);
-  } catch (e) {}
-  */
+   try {
+     oldElement.parentNode.replaceChild(newElement, oldElement);
+   } catch (e) {}
+   */
 }
 
 let createElementFromHTML = function (htmlString) {
@@ -60,6 +60,24 @@ let createElementFromHTML = function (htmlString) {
   // Change this to div.childNodes to support multiple top-level nodes
   return div.firstChild;
 };
+
+function oldMethod() {
+  let article = document.getElementsByTagName("article");
+  let adscont = document.getElementById("hexo-adsense-ads-content");
+  if (adscont && adscont.length) {
+    if (article && article.length) {
+      let linebreak = article.item(0).getElementsByTagName("br");
+      if (linebreak.length > 0) {
+        return replaceWith(adscont, linebreak.item(0));
+      }
+
+      let headings = article.item(0).querySelectorAll("h2,h3,h4,h5");
+      if (headings && headings.length > 0) {
+        return insertAfter(adscont, headings.item(0));
+      }
+    }
+  }
+}
 
 /**
  * random number between min and max
@@ -166,6 +184,22 @@ function newMethod() {
     // summon adsbygoogle.push()
     adsensePush();
   }
+}
+
+function eventMethod() {
+  document.addEventListener("DOMContentLoaded", function () {
+    // we look for the jump break
+    var _moreElm = document.querySelector("a[name=more]");
+
+    // here is your adsense code
+    var _adsenseCode = " [replace this with code from the last step] ";
+
+    // This inserts the ad inside of the blog post
+    _moreElm.insertAdjacentHTML("afterend", '<div class="adsense-after-break">' + _adsenseCode + "</div>");
+
+    // Initialize the ads here
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  });
 }
 
 /**

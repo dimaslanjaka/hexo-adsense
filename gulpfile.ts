@@ -9,14 +9,14 @@ import { exec } from "child_process";
 import htmlmin from "gulp-html-minifier-terser";
 
 function tsc(cb) {
-  exec("tsc", function (err, stdout, stderr) {
+  exec("npx tsc", function (err, stdout, stderr) {
     console.log(stdout);
     console.log(stderr);
     cb(err);
   });
 }
 
-function es() {
+function copy() {
   return gulp.src("./source/*.js").pipe(gulpTerser({}, terser.minify)).pipe(gulp.dest("./lib/source"));
 }
 
@@ -46,4 +46,4 @@ function html() {
     .pipe(gulp.dest("./lib/source"));
 }
 
-exports.default = gulp.series(clean, es, css, html, tsc);
+exports.default = gulp.series(clean, copy, css, html, tsc);
