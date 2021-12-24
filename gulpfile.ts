@@ -7,6 +7,7 @@ import sourcemaps from "gulp-sourcemaps";
 import del from "del";
 import { exec } from "child_process";
 import htmlmin from "gulp-html-minifier-terser";
+import Promise from "bluebird";
 
 function tsc(cb) {
   exec("npx tsc", function (err, stdout, stderr) {
@@ -16,8 +17,12 @@ function tsc(cb) {
   });
 }
 
-function copy() {
-  return gulp.src("./source/*.js").pipe(gulpTerser({}, terser.minify)).pipe(gulp.dest("./lib/source"));
+function copy(done) {
+  return Promise.resolve(gulp.src("./source/*.js").pipe(gulpTerser({}, terser.minify)).pipe(gulp.dest("./lib/source")))
+    .then(() => {
+      gulp.src(["./packages/**/*", "!**/.git**", "!**.gitmodules**"]).pipe(gulp.dest("./lib/packages"));
+    })
+    .finally(done);
 }
 
 function css() {
@@ -47,3 +52,4 @@ function html() {
 }
 
 exports.default = gulp.series(clean, copy, css, html, tsc);
+exports.copy = copy;
