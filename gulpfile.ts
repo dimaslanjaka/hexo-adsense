@@ -20,7 +20,7 @@ function tsc(cb) {
 function copy(done) {
   return Promise.resolve(gulp.src("./source/*.js").pipe(gulpTerser({}, terser.minify)).pipe(gulp.dest("./lib/source")))
     .then(() => {
-      gulp.src(["./packages/**/*", "!**/.git**", "!**.gitmodules**"]).pipe(gulp.dest("./lib/packages"));
+      //gulp.src(["./packages/**/*", "!**/.git**", "!**.gitmodules**"]).pipe(gulp.dest("./lib/packages"));
     })
     .finally(done);
 }

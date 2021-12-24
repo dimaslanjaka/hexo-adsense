@@ -12,7 +12,8 @@
   "files": [
     "lib",
     "packages",
-    "*.md"
+    "*.{md,json}",
+    "gulpfile.ts"
   ],
   "keywords": [
     "hexo",

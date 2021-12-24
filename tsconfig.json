@@ -25,6 +25,9 @@
     "skipDefaultLibCheck": true,
     "noImplicitAny": false,
     "noUnusedLocals": false,
+    "allowUmdGlobalAccess": true,
+    "allowUnreachableCode": true,
+    "allowUnusedLabels": true,
     "noImplicitThis": false
   },
   "exclude": [
