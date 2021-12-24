@@ -1,0 +1,3 @@
+[submodule "packages/@types"]
+	path = packages/@types
+	url = https://github.com/dimaslanjaka/nodejs-package-types
