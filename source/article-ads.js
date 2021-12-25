@@ -72,7 +72,7 @@ function ranumb(min, max) {
 function newMethod() {
   const adshide = document.getElementById("hexo-adsense-hidden");
   let adscont = adshide.querySelectorAll('[hexo-adsense="ads-content"]');
-  const article = document.querySelectorAll("article");
+  let article = document.querySelectorAll("article");
   if (article.length > 0 && adscont.length > 0) {
     /**
      * @type {HTMLElement}
@@ -147,6 +147,9 @@ function newMethod() {
       }
     } else {
       console.log("webpage is not post");
+      if (!article.length) {
+        article = document.querySelectorAll('[class*="recent-post-item"]');
+      }
       // generate index of articles
       let articles_index = Array.apply(null, { length: article.length }).map(Number.call, Number);
       // randomize linebreaks index
