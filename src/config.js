@@ -16,7 +16,14 @@ const defaultConfig = {
   pub: "",
   adblock: false,
   https: false,
+  /**
+   * @type {"site" | "post"}
+   */
   field: "site",
+  /**
+   * @type {"amp" | "javascript"}
+   */
+  type: 'javascript',
   exclude: [".gitignore"],
   /**
    * is development mode?
