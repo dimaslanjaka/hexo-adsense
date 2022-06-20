@@ -112,7 +112,7 @@ tags:
 
 # Website using Hexo NodeJS Blogging System
 
-[![Build And Tests](https://github.com/dimaslanjaka/dimaslanjaka.github.io/actions/workflows/page.yml/badge.svg?branch=compiler)](https://github.com/dimaslanjaka/dimaslanjaka.github.io/actions/workflows/page.yml)
+[![Test And Deploy](https://github.com/dimaslanjaka/static-blog-generator-hexo/actions/workflows/test.yml/badge.svg)](https://github.com/dimaslanjaka/static-blog-generator-hexo/actions/workflows/test.yml)
 [![GitHub](https://badgen.net/badge/icon/github?icon=github&label&style=flat-square)](https://github.com/dimaslanjaka/dimaslanjaka.github.io/tree/compiler)
 [![webmanajemen.com](https://img.shields.io/website.svg?down_color=red&down_message=down&style=flat-square&up_color=green&up_message=up&label=webmanajemen.com&url=https://webmanajemen.com)](https://webmanajemen.com)
 
