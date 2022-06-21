@@ -6,5 +6,5 @@
  * const locals = ["127.0.0.1", "localhost", "::1"];
  * checkLocalHost(locals[0]).then(function (isLocal){}) // isLocal is true
  */
-declare const checkLocalHost: any;
+declare const checkLocalHost: <T = Function>(fn: T, hashFn?: (...args: any[]) => string) => T;
 export { checkLocalHost as default };
