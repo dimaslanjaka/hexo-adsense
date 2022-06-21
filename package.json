@@ -1,6 +1,6 @@
 {
   "name": "hexo-adsense",
-  "version": "1.0.26",
+  "version": "1.0.27",
   "description": "Hexo adsense support",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
