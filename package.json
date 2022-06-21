@@ -34,7 +34,7 @@
     "hexo-extend-injector2": "file:packages/hexo-extend-injector2",
     "hexo-fs": "^3.1.0",
     "hexo-log": "^3.0.0",
-    "md5-file": "^4.0.0",
+    "md5-file": "^5.0.0",
     "minimatch": "^3.0.4",
     "moment": "^2.29.1",
     "node-html-parser": "^5.1.0",
