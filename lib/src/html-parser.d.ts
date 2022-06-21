@@ -1,9 +1,8 @@
-export function parse(str: any): jsdom.JSDOM;
+export function parse(str: any): any;
 /**
  * create node from html string
  * @param {string} htmlString
  * @returns
  */
-declare function createElementFromHTML(htmlString: string): ChildNode;
-import jsdom = require("jsdom");
+declare function createElementFromHTML(htmlString: string): any;
 export { createElementFromHTML as createNodeFromHtml };

@@ -1,13 +1,13 @@
+import Promise from "bluebird";
+import { exec } from "child_process";
+import del from "del";
 import gulp from "gulp";
-import terser from "terser";
-import gulpTerser from "gulp-terser";
 import autoprefixer from "gulp-autoprefixer";
 import cleanCSS from "gulp-clean-css";
-import sourcemaps from "gulp-sourcemaps";
-import del from "del";
-import { exec } from "child_process";
 import htmlmin from "gulp-html-minifier-terser";
-import Promise from "bluebird";
+import sourcemaps from "gulp-sourcemaps";
+import gulpTerser from "gulp-terser";
+import terser from "terser";
 
 function tsc(cb) {
   exec("npx tsc", function (err, stdout, stderr) {
@@ -18,7 +18,12 @@ function tsc(cb) {
 }
 
 function copy(done) {
-  return Promise.resolve(gulp.src("./source/*.js").pipe(gulpTerser({}, terser.minify)).pipe(gulp.dest("./lib/source")))
+  return Promise.resolve(
+    gulp
+      .src("./source/*.js")
+      .pipe(gulpTerser({}, terser.minify))
+      .pipe(gulp.dest("./lib/source"))
+  )
     .then(() => {
       //gulp.src(["./packages/**/*", "!**/.git**", "!**.gitmodules**"]).pipe(gulp.dest("./lib/packages"));
     })
@@ -47,7 +52,14 @@ function clean() {
 function html() {
   return gulp
     .src("source/*.html")
-    .pipe(htmlmin({ collapseWhitespace: true, minifyJS: true, minifyCSS: true, preserveLineBreaks: true }))
+    .pipe(
+      htmlmin({
+        collapseWhitespace: true,
+        minifyJS: true,
+        minifyCSS: true,
+        preserveLineBreaks: true,
+      })
+    )
     .pipe(gulp.dest("./lib/source"));
 }
 

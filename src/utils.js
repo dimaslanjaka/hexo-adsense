@@ -1,3 +1,4 @@
+/* eslint-disable no-global-assign */
 /* global hexo */
 "use strict";
 
@@ -49,7 +50,7 @@ const isIgnore = (path0, exclude, hexo) => {
     }
   }
   return false;
-}
+};
 
 function streamToString(stream) {
   return new Promise((resolve, reject) => {

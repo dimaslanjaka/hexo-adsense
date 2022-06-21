@@ -1,7 +1,7 @@
-var dns = require("dns");
-var os = require("os");
+const dns = require("dns");
+const os = require("os");
 const { memoize } = require("./utils");
-var ifaces = os.networkInterfaces();
+const ifaces = os.networkInterfaces();
 
 /**
  * Check if address/dnsname is local

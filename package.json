@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint --ext .js,.jsx,.ts,.d.ts,.tsx ./",
     "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.d.ts,.tsx ./",
-    "build": "rm -rf lib && gulp"
+    "build": "rimraf -rf lib && gulp"
   },
   "files": [
     "lib",
@@ -45,6 +45,7 @@
   "devDependencies": {
     "@types/gulp-sourcemaps": "^0.0.35",
     "@types/hexo": "file:packages/@types/hexo",
+    "@types/node": "^18.0.0",
     "@typescript-eslint/parser": "^4.33.0",
     "del": "^6.0.0",
     "eslint": "^7.32.0",
@@ -58,7 +59,9 @@
     "gulp-sourcemaps": "^3.0.0",
     "gulp-terser": "^2.1.0",
     "jsdom": "^18.0.1",
-    "prettier": "2.4.1",
-    "typescript": "^4.4.4"
+    "prettier": "^2.4.1",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.4"
   }
 }

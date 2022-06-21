@@ -16,5 +16,4 @@ export function after_render_html(content: string, data: object): string;
  * hexo.extend.filter.register("after_generate", injectAdsAfterGenerate);
  */
 export function after_post_render(data: any): any;
-import Hexo = require("hexo");
 export { articleAds as endbodycode };

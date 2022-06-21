@@ -54,11 +54,17 @@ function articleAds(files, hexo) {
         html = html.replace(/><\/ins>/gm, ` data-adtest="on"></ins>`);
       }
       // replace script adsbygoogle.push
-      html = html.replace(/\(adsbygoogle?\s*=?\s*window\.adsbygoogle?\s*\|\|?\s*\[\]\)\.push\({}\);/gm, "");
+      html = html.replace(
+        /\(adsbygoogle?\s*=?\s*window\.adsbygoogle?\s*\|\|?\s*\[\]\)\.push\({}\);/gm,
+        ""
+      );
       // replace scripts
       //html = html.replace(/<script\b[^>]*>([\s\S]*?)<\/script>/gm, "");
       // replace script src=adsbygoogle.js
-      html = html.replace(/<script?.*src?.*adsbygoogle\b[^>]*>([\s\S]*?)<\/script>/gm, "");
+      html = html.replace(
+        /<script?.*src?.*adsbygoogle\b[^>]*>([\s\S]*?)<\/script>/gm,
+        ""
+      );
       result.push(adsContent.replace("ADS_CODE_HERE", html));
     }
   });
@@ -135,7 +141,11 @@ const filter_patterns = function (content, source_path, hexo) {
   const options = require("./config")(hexo);
   let excluded = utils.isIgnore(source_path, options.exclude, hexo);
   // if `source_path` undefined, that is archive or tags
-  if (source_path && excluded && !minimatch(source_path, "**/*.{htm,html}", { nocase: true })) {
+  if (
+    source_path &&
+    excluded &&
+    !minimatch(source_path, "**/*.{htm,html}", { nocase: true })
+  ) {
     log.log({ [source_path]: excluded }, "isnt html, skipping...");
     return {
       content: content,
@@ -145,7 +155,7 @@ const filter_patterns = function (content, source_path, hexo) {
   //log.log("is excluded", excluded, source_path);
   // if the post or page is match excluded pattern, return original contents
   if (excluded) {
-    //remove pagead on head caused by ../index.js
+    // remove pagead on head caused by ../index.js
     content = content.replace(
       /<script?.*src?.*adsbygoogle?\b[^>]*>([\s\S]*?)<\/script>/gm,
       "<!--hexo-adsense disabled on this page-->"
@@ -171,7 +181,11 @@ function after_post_render(data) {
   const options = require("./config")(hexo);
   //utils.dump("after_post_render/" + md5(data.title) + ".txt", data);
 
-  const filterPattern = filter_patterns(data.content, getPageSource(data), hexo);
+  const filterPattern = filter_patterns(
+    data.content,
+    getPageSource(data),
+    hexo
+  );
   data.content = filterPattern.content;
   if (filterPattern.excluded) {
     // if this post excluded, return original data
@@ -216,12 +230,18 @@ function processAdsHtml(content, adshtml, hexo) {
   const replacement = memoize(function (adshtml) {
     const adsContentCss = __dirname.joinpath("../source/article-ads.css");
     const adsContentJs = __dirname.joinpath("../source/article-ads.js");
-    let replacement = `<div id="hexo-adsense-hidden" style="display:none">${adshtml.join("")}</div>`;
+    let replacement = `<div id="hexo-adsense-hidden" style="display:none">${adshtml.join(
+      ""
+    )}</div>`;
     if (fs.existsSync(adsContentCss)) {
-      replacement += `<style>${fs.readFileSync(adsContentCss).toString()}</style>`;
+      replacement += `<style>${fs
+        .readFileSync(adsContentCss)
+        .toString()}</style>`;
     }
     if (fs.existsSync(adsContentJs)) {
-      replacement += `<script>${fs.readFileSync(adsContentJs).toString()}</script>`;
+      replacement += `<script>${fs
+        .readFileSync(adsContentJs)
+        .toString()}</script>`;
     }
     return replacement;
   });

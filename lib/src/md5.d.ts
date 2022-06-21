@@ -1,2 +1,7 @@
-export = md5;
-declare function md5(s: any): any;
+/**
+ * PHP MD5 Equivalent
+ * @param data
+ * @returns
+ */
+export declare function md5(data: string): string;
+export default md5;

@@ -23,7 +23,7 @@ const defaultConfig = {
   /**
    * @type {"amp" | "javascript"}
    */
-  type: 'javascript',
+  type: "javascript",
   exclude: [".gitignore"],
   /**
    * is development mode?
@@ -42,8 +42,9 @@ module.exports = function (hexo) {
      * @type {typeof defaultConfig}
      */
     const c = assign(defaultConfig, hexo.config.adsense);
-    c.development = defaultConfig.development = require("../packages/hexo-cli-extras/lib/env").isDev(hexo);
-    ///////////console.log(c);
+    c.development = defaultConfig.development =
+      require("../packages/hexo-cli-extras/lib/env").isDev(hexo);
+    // console.log(c);
     return c;
   }
   return defaultConfig;
