@@ -10,7 +10,7 @@ Hexo adsense support
 - support display adsense on localhost
 
 # Demo
-[My Blog](https://www.webmanajemen.com/NodeJS/eslint-prettier-typescript-vscode.html) try reload page. ads should be automated display in random positions of pseudo html elements (such as header, new line `<br/>`, after pretext `<pre/>`) useful for increasing **RPM** and **CTR** Adsense Prices.
+~[My Blog](https://www.webmanajemen.com/NodeJS/eslint-prettier-typescript-vscode.html) try reload page. ads should be automated display in random positions of pseudo html elements (such as header, new line `<br/>`, after pretext `<pre/>`) useful for increasing **RPM** and **CTR** Adsense Prices.~
 
 # Installation
 Using Git Repository (Development)
