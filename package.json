@@ -59,7 +59,7 @@
     "gulp-html-minifier-terser": "^6.0.1",
     "gulp-sourcemaps": "^3.0.0",
     "gulp-terser": "^2.1.0",
-    "jsdom": "^18.0.1",
+    "jsdom": "^20.0.0",
     "prettier": "^2.4.1",
     "rimraf": "^3.0.2",
     "ts-node": "^10.8.1",
