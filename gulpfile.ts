@@ -66,17 +66,29 @@ function html() {
     .pipe(gulp.dest("./lib/source"));
 }
 
-async function updateVersion() {
-  const parse = String(pkg.version)
-    .split(".")
-    .map((n) => parseInt(n));
-  const major = parse[0];
-  const minor = parse[1];
-  const patch = parse[2] + 1; // +1
-  const merge = `${major}.${minor}.${patch}`;
-  pkg.version = merge;
-  const build = JSON.stringify(pkg, null, 2) + "\n";
-  writeFileSync(join(__dirname, "package.json"), build);
+function updateVersion() {
+  return new Promise((resolve) => {
+    const parse = String(pkg.version)
+      .split(".")
+      .map((n) => parseInt(n));
+    let major = parse[0];
+    let minor = parse[1];
+    if (minor > 10) {
+      minor = 0;
+      major += 1;
+    }
+    let patch = parse[2] + 1; // +1
+    if (patch > 10) {
+      patch = 0;
+      minor += 1;
+    }
+
+    const merge = `${major}.${minor}.${patch}`;
+    pkg.version = merge;
+    const build = JSON.stringify(pkg, null, 2) + "\n";
+    writeFileSync(join(__dirname, "package.json"), build);
+    resolve();
+  });
 }
 
 gulp.task("update", updateVersion);
