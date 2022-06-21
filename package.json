@@ -43,6 +43,7 @@
     "underscore": "^1.13.1"
   },
   "devDependencies": {
+    "@types/gulp": "^4.0.9",
     "@types/gulp-sourcemaps": "^0.0.35",
     "@types/hexo": "file:packages/@types/hexo",
     "@types/node": "^18.0.0",
