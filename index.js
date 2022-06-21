@@ -32,7 +32,9 @@ if (!isDevelopment) {
   if (typeof config.https == "boolean") {
     if (config.https) {
       injector.register("body-end", function () {
-        const https_js = fs.readFileSync(path.join(__dirname, "source/https.js")).toString();
+        const https_js = fs
+          .readFileSync(path.join(__dirname, "source/https.js"))
+          .toString();
         return `<script>${https_js}</script>`;
       });
     }
@@ -41,8 +43,12 @@ if (!isDevelopment) {
   // add adblock blocker
   if (typeof config.adblock == "boolean") {
     if (config.adblock) {
-      const adblock_css = fs.readFileSync(path.join(__dirname, "source/adblock.css")).toString();
-      const adblock_js = fs.readFileSync(path.join(__dirname, "source/adblock.js")).toString();
+      const adblock_css = fs
+        .readFileSync(path.join(__dirname, "source/adblock.css"))
+        .toString();
+      const adblock_js = fs
+        .readFileSync(path.join(__dirname, "source/adblock.js"))
+        .toString();
       injector.register("body-end", function () {
         return `<style>${adblock_css}</style><script>${adblock_js}</script>`;
       });
@@ -63,7 +69,7 @@ injector.register("head_end", function () {
 if (config.enable) {
   // adsense enabled to all pages
   injector.register("head-end", {
-    value: `<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1165447249910969" crossorigin="anonymous"></script>`,
+    value: `<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${config.pub}" crossorigin="anonymous"></script>`,
   });
 }
 
@@ -84,10 +90,16 @@ if (typeof config.article_ads != "undefined") {
   if (config.field === "post") {
     // only on post
     //log.log("after_post_render");
-    hexo.extend.filter.register("after_post_render", require("./src/article-ads").after_post_render);
+    hexo.extend.filter.register(
+      "after_post_render",
+      require("./src/article-ads").after_post_render
+    );
   } else {
     //log.log("after_render:html");
     // entire html
-    hexo.extend.filter.register("after_render:html", require("./src/article-ads").after_render_html);
+    hexo.extend.filter.register(
+      "after_render:html",
+      require("./src/article-ads").after_render_html
+    );
   }
 }
