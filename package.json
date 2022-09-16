@@ -37,7 +37,7 @@
     "md5-file": "^5.0.0",
     "minimatch": "^5.1.0",
     "moment": "^2.29.1",
-    "node-html-parser": "^5.1.0",
+    "node-html-parser": "^6.0.0",
     "object-assign": "^4.1.1",
     "terser": "^5.10.0",
     "underscore": "^1.13.1"
