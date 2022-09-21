@@ -7,7 +7,8 @@
   "scripts": {
     "lint": "eslint --ext .js,.jsx,.ts,.d.ts,.tsx ./",
     "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.d.ts,.tsx ./",
-    "build": "rimraf -rf lib && gulp"
+    "build": "rimraf -rf lib && gulp",
+    "update": "npx npm-check-updates -u -x chalk"
   },
   "files": [
     "lib",
