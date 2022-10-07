@@ -7,8 +7,8 @@
   "scripts": {
     "lint": "eslint --ext .js,.jsx,.ts,.d.ts,.tsx ./",
     "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.d.ts,.tsx ./",
-    "build": "rimraf -rf lib && tsc && gulp",
-    "update": "npx npm-check-updates -u -x chalk",
+    "build": "rimraf -rf lib && gulp",
+    "update": "npx npm-check-updates -u -x hexo,chalk",
     "patch": "npm version patch",
     "minor": "npm version minor",
     "major": "npm version major"
@@ -43,16 +43,15 @@
     "moment": "^2.29.4",
     "node-html-parser": "^6.1.1",
     "object-assign": "^4.1.1",
-    "terser": "^5.15.0",
+    "terser": "^5.15.1",
     "underscore": "^1.13.6"
   },
   "devDependencies": {
     "@types/gulp": "^4.0.9",
     "@types/gulp-sourcemaps": "^0.0.35",
     "@types/hexo": "file:packages/@types/hexo",
-    "@types/node": "^18.8.0",
-    "@typescript-eslint/parser": "^5.38.1",
-    "del": "^7.0.0",
+    "@types/node": "^18.8.3",
+    "@typescript-eslint/parser": "^5.39.0",
     "eslint": "^8.24.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
