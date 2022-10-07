@@ -56,17 +56,16 @@ if (!isDevelopment) {
   }
 }
 
-injector.register("head_end", function () {
-  let adsenseConfigObject;
-  if (isDevelopment) {
-    adsenseConfigObject = JSON.stringify(assign(config, hexo.env), null, 2);
-  } else {
-    adsenseConfigObject = JSON.stringify(assign(config, hexo.env));
-  }
-  return `<script id="hexo-adsense-config" type="application/json">${adsenseConfigObject}</script>`;
-});
-
 if (config.enable) {
+  injector.register("head_end", function () {
+    let adsenseConfigObject;
+    if (isDevelopment) {
+      adsenseConfigObject = JSON.stringify(assign(config, hexo.env), null, 2);
+    } else {
+      adsenseConfigObject = JSON.stringify(assign(config, hexo.env));
+    }
+    return `<script id="hexo-adsense-config" type="application/json">${adsenseConfigObject}</script>`;
+  });
   // adsense enabled to all pages
   injector.register("head-end", {
     value: `<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${config.pub}" crossorigin="anonymous"></script>`,
