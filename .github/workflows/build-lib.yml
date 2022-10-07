@@ -23,9 +23,6 @@ jobs:
       with:
         node-version: '16'
         check-latest: true
-    - run: npm i -g gulp-cli ts-node typescript
-    - run: npm install
-    - run: npm run build
     
     # https://stackoverflow.com/a/61699863/6404439
     # ${{ steps.vars.outputs.branch }}
@@ -48,6 +45,10 @@ jobs:
         git pull --recurse-submodule
         git submodule update -i -r
         git submodule foreach git submodule update -i -r
+        
+    - run: npm i -g gulp-cli ts-node typescript
+    - run: npm install
+    - run: npm run build
     
     - name: commit and push
       continue-on-error: true
