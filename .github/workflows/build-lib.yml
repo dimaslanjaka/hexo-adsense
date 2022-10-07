@@ -7,7 +7,7 @@ on:
 
 jobs:
   build_on_win:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
@@ -16,4 +16,10 @@ jobs:
         check-latest: true
     - run: npm ci
     - run: npm run build
+    - name: Upload logs on fail
+      if: ${{ success() }}
+      uses: actions/upload-artifact@v3
+      with:
+        name: Upload lib
+        path: lib
     
