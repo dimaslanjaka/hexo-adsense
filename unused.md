@@ -1,12 +1,11 @@
 Unused dependencies
+* hexo-cli-extras
 * hexo-extend-injector2
+* node-html-parser
 Unused devDependencies
-* @types/jsdom
+* @types/hexo
+* eslint-plugin-import
 * ts-node
 * typescript
 Missing dependencies
-* @typescript-eslint/parser: ./.eslintrc.js
-* eslint-plugin-ejs: ./.eslintrc.js
-* minimatch: ./lib/article-ads.js
-* object-assign: ./lib/config.js
-* bluebird: ./lib/utils.js
+* hexo: ./src/article-ads.js

@@ -22,7 +22,7 @@ export function dump(filename: string, ...obj: any): any;
 export function isIgnore(path0: string, exclude: string[] | string, hexo: Hexo): boolean;
 declare function randomInt(min: any, max: any): number;
 export function streamToString(stream: any): Promise<any>;
-export function isFileChanged(filePath: any): any;
+export function isFileChanged(filePath: any): globalThis.Promise<boolean>;
 export function getFileCache(filePath: any, defaultData: any): any;
 export function setFileCache(filePath: any, newData: any): void;
 export function setHexo(inHexo: any): void;
