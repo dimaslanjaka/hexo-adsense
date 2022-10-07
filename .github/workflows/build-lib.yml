@@ -48,9 +48,10 @@ jobs:
         git submodule update -i -r
         git submodule foreach git submodule update -i -r
     
-    - name: commit
+    - name: commit and push
       continue-on-error: true
       run: |
         git add lib
         git commit -m "build from ${{ steps.vars.outputs.hash }}"
+        git push origin master
     
