@@ -23,6 +23,7 @@ jobs:
       with:
         node-version: '16'
         check-latest: true
+    - run: npm i -g gulp-cli ts-node typescript
     - run: npm install
     - run: npm run build
     
