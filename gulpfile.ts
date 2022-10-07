@@ -28,7 +28,7 @@ function copy(done) {
 			.pipe(gulp.dest("./lib/source"))
 	)
 		.then(() => {
-			//gulp.src(["./packages/**/*", "!**/.git**", "!**.gitmodules**"]).pipe(gulp.dest("./lib/packages"));
+			//gulp.src(["./packages/**/*", "!**/.git**", "!**/tmp/**"]).pipe(gulp.dest("./lib/packages"));
 		})
 		.finally(done);
 }
