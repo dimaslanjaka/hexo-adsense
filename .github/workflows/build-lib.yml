@@ -3,7 +3,7 @@ name: Build lib
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build_on_win:
