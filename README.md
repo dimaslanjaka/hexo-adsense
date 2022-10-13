@@ -1,7 +1,5 @@
 # hexo-adsense
-Hexo adsense support
-
-> first development finished on 12 November 2021
+Hexo adsense support 
 
 # Features
 - can display adsense to all pages except specific posts or pages (multiple supported)
@@ -113,6 +111,9 @@ tags:
   - tags1
   - tags2
 ```
+
+## Footnote
+first development finished on 12 November 2021
 
 # Website using Hexo NodeJS Blogging System
 
