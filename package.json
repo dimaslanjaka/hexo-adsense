@@ -43,7 +43,7 @@
     "moment": "^2.29.4",
     "node-html-parser": "^6.1.4",
     "object-assign": "^4.1.1",
-    "terser": "^5.16.0",
+    "terser": "^5.16.1",
     "underscore": "^1.13.6"
   },
   "devDependencies": {
@@ -53,7 +53,7 @@
     "@types/node": "^18.11.10",
     "@typescript-eslint/eslint-plugin": "^5.45.0",
     "@typescript-eslint/parser": "^5.45.0",
-    "eslint": "^8.28.0",
+    "eslint": "^8.29.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.2.1",
