@@ -39,7 +39,7 @@
     "hexo-fs": "^4.1.1",
     "hexo-log": "^4.0.1",
     "md5-file": "^5.0.0",
-    "minimatch": "^5.1.1",
+    "minimatch": "^9.0.3",
     "moment": "^2.29.4",
     "node-html-parser": "^6.1.4",
     "object-assign": "^4.1.1",
