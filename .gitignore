@@ -1,6 +1,8 @@
 **/yarn.lock
 **/package-lock.json
 **/.yarn/cache*
+/lib
+/dist
 
 # Logs
 logs
