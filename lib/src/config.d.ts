@@ -1,6 +1,5 @@
 declare function _exports(hexo: Hexo): typeof defaultConfig;
 export = _exports;
-import Hexo = require("hexo");
 declare namespace defaultConfig {
     const enable: boolean;
     const article_ads: string[];
