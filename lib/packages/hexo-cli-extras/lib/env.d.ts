@@ -1,3 +1,3 @@
-export function isProd(hexo: any): boolean;
-export function isDev(hexo: any): boolean;
-export declare function env(inHexo: any): string;
+export const isProd: any;
+export const isDev: any;
+export declare function env(inHexo: any): any;
