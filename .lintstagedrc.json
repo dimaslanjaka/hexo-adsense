@@ -1,0 +1,17 @@
+{
+  "*.js": "set ESLINT_USE_FLAT_CONFIG=true && eslint --fix",
+  "*.cjs": "set ESLINT_USE_FLAT_CONFIG=true && eslint --fix",
+  "*.mjs": "set ESLINT_USE_FLAT_CONFIG=true && eslint --fix",
+  "*.ts": "set ESLINT_USE_FLAT_CONFIG=true && eslint --fix",
+  "*.jsx": "set ESLINT_USE_FLAT_CONFIG=true && eslint --fix",
+  "*.tsx": "set ESLINT_USE_FLAT_CONFIG=true && eslint --fix",
+  "*.json": "prettier --list-different --write",
+  "*.css": "prettier --list-different --write",
+  "*.scss": "prettier --list-different --write",
+  "*.less": "prettier --list-different --write",
+  "*.yml": "prettier --list-different --write",
+  "*.yaml": "prettier --list-different --write",
+  "*.php": "composer exec php-cs-fixer fix",
+  "*.sql": "prettier --list-different --write",
+  "*.py": "black"
+}

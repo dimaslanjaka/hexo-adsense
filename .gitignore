@@ -1,3 +1,7 @@
+**/yarn.lock
+**/package-lock.json
+**/.yarn/cache*
+
 # Logs
 logs
 *.log

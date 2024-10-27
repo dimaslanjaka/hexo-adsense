@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json.schemastore.org/prettierrc",
+  "semi": true,
+  "printWidth": 120,
+  "singleQuote": false,
+  "trailingComma": "none",
+  "tabWidth": 2,
+  "plugins": ["prettier-plugin-embed", "prettier-plugin-sql"]
+}

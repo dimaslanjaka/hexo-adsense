@@ -1,0 +1,8 @@
+{
+  "exclude": ".venv,venv,.tox,.eggs,dist,source",
+  "format_css": false,
+  "format_js": false,
+  "extension": "njk",
+  "ignore": "T003,T002,H021,T028,H006",
+  "indent": 2
+}
