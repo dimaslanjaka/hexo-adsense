@@ -63,8 +63,13 @@ let createElementFromHTML = function (htmlString) {
 function newMethod() {
   console.log('new method initialize');
   const adshide = document.getElementById('hexo-adsense-hidden');
-  let adscont = adshide.querySelectorAll('[hexo-adsense="ads-content"]');
-  let article = document.querySelectorAll('article');
+  let adscont = Array.from(adshide.querySelectorAll('[hexo-adsense="ads-content"]'));
+  let article = Array.from(document.querySelectorAll('article'));
+  if (!article.length) {
+    const post = document.querySelector('#post');
+    if (post) article = [post];
+  }
+
   if (article.length > 0 && adscont.length > 0) {
     /**
      * @type {HTMLElement}
@@ -72,11 +77,12 @@ function newMethod() {
     let ads;
     if (article.length == 1) {
       console.log('webpage is post');
-      let targetArticle = article.item(0);
+      let targetArticle = article[0];
 
       // prioritize hexo-adsense-fill before auto ads on other elements
       const ads_fill = targetArticle.querySelectorAll('*[hexo-adsense-fill]');
       if (ads_fill.length > 0) {
+        console.log('found hexo-adsense-fill', ads_fill.length);
         for (let index = 0; index < ads_fill.length; index++) {
           const toFill = ads_fill[index];
           if (typeof adscont[index] !== 'undefined') {
@@ -85,22 +91,48 @@ function newMethod() {
         }
       }
 
-      // the rest of the ads will show automatically after headers, pre elements
-      adscont = adshide.querySelectorAll('[hexo-adsense="ads-content"]');
-      //console.log(adscont.length, "ads left");
+      // the rest of the ads will show automatically after headers elements
+      adscont = Array.from(adshide.querySelectorAll('[hexo-adsense="ads-content"]'));
+
       if (adscont.length > 0) {
-        const headers = targetArticle.querySelectorAll('h1,h2,h3,h4,h5,h6,pre');
+        console.log('Iterating headers', adscont.length, 'ads left');
+        const headers = targetArticle.querySelectorAll('h1,h2,h3,h4,h5,h6');
         if (headers.length > 0) {
           // generate index of headers
           let headers_index = Array.apply(null, { length: headers.length }).map(Number.call, Number);
           //console.log(headers_index);
           for (let index = 0; index < adscont.length; index++) {
-            ads = adscont[index];
-            const rheaders = shuffleArr2(headers_index);
+            // ads = adscont[index];
+            ads = adscont.shift();
+            const rheaders = array_shuffle(headers_index);
             // pick a random index
             const rheader = rheaders.next().value;
             if (typeof rheader === 'number') {
               const header = headers.item(rheader);
+              insertAfter(createElementFromHTML(ads), header);
+            }
+          }
+        }
+      }
+
+      if (adscont.length > 0) {
+        console.log('Iterating pre code', adscont.length, 'ads left');
+
+        // Select all <pre> elements that are not inside a <td>
+        const preElements = document.querySelectorAll('pre:not(td > pre)');
+
+        if (preElements.length > 0) {
+          // generate index of headers
+          let preElements_index = Array.apply(null, { length: preElements.length }).map(Number.call, Number);
+          //console.log(headers_index);
+          for (let index = 0; index < adscont.length; index++) {
+            // ads = adscont[index];
+            ads = adscont.shift();
+            const rPreElements = array_shuffle(preElements_index);
+            // pick a random index
+            const rPre = rPreElements.next().value;
+            if (typeof rPre === 'number') {
+              const header = preElements.item(rPre);
               insertAfter(createElementFromHTML(ads), header);
             }
           }
@@ -116,7 +148,7 @@ function newMethod() {
           let linebreaks_index = Array.apply(null, { length: linebreaks.length }).map(Number.call, Number);
           //console.log(linebreaks_index);
           // randomize linebreaks index
-          const rlinebreaks = shuffleArr2(linebreaks_index);
+          const rlinebreaks = array_shuffle(linebreaks_index);
           for (let index = 0; index < adscont.length; index++) {
             ads = adscont[index];
             // pick a random index
@@ -145,7 +177,7 @@ function newMethod() {
       // generate index of articles
       let articles_index = Array.apply(null, { length: article.length }).map(Number.call, Number);
       // randomize linebreaks index
-      const rArticles = shuffleArr2(articles_index);
+      const rArticles = array_shuffle(articles_index);
       for (let index = 0; index < adscont.length; index++) {
         ads = adscont[index];
         // pick a random index
@@ -168,7 +200,7 @@ function newMethod() {
  * @see {@link shuffleArr}
  * @param {any[]} array
  */
-function* shuffleArr2(array) {
+function* array_shuffle(array) {
   var i = array.length;
 
   while (i--) {
