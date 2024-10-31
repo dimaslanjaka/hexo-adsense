@@ -54,7 +54,7 @@ export const isDev = memoize((hexo: Hexo | null): boolean => getEnv(hexo) === 'd
 export const isProd = memoize((hexo: Hexo | null): boolean => getEnv(hexo) === 'production');
 export const env = (inHexo: Hexo | null): Environment => getEnv(inHexo);
 
-type DefaultConfig = {
+export type DefaultConfig = {
   [key: string]: any;
 
   /**
