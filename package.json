@@ -60,7 +60,7 @@
     "hexo-cli-extras": "file:packages/hexo-cli-extras",
     "hexo-extend-injector2": "file:packages/hexo-extend-injector2",
     "hexo-fs": "^4.1.3",
-    "hexo-is": "^2.0.0",
+    "hexo-is": "^2.0.1",
     "hexo-log": "^4.1.0",
     "hexo-util": "^3.3.0",
     "jsdom": "^25.0.1",

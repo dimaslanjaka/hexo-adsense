@@ -15,7 +15,7 @@ module.exports = function modExports(hexo) {
       if (!editor) {
         open(post.path);
       } else {
-        edit = spawn(editor, [post.path], {stdio: 'inherit'});
+        edit = spawn(editor, [post.path], { stdio: 'inherit' });
         edit.on('exit', process.exit);
       }
     }

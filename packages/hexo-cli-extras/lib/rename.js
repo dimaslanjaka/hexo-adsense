@@ -25,147 +25,161 @@ module.exports = function modExports(args) {
   }
 
   // load database
-  this.load().then(function loadDB() {
-    var selectedPost;
+  this.load().then(
+    function loadDB() {
+      var selectedPost;
 
-    loadArticles(this.locals).then(function select(arts) {
-      return selectArticle(arts);
-    }).then(function selectRename(selected) {
-      selectedPost = selected;
-      return chooseRenameStyle(selectedPost);
-    }).then(function process(renameStyle) {
-      if (renameStyle === 'filename') {
-        return renameFile(selectedPost, newName);
-      } else if (renameStyle === 'title') {
-        return renameTitle(selectedPost, newName);
-      } else {
-        return renameTitle(selectedPost, newName).then(function alsoFilename() {
-          return renameFile(selectedPost, newName);
-        });
-      }
-    }).catch(function catchAll(err) {
-      console.log(err.stack ? chalk.red(err.stack) : chalk.red('Error: ') + chalk.gray(err));
-      process.exit();
-    });
-
-    function selectArticle(items) {
-      var articles = filterOnName(items, oldName);
-
-      if (articles.length === 0) {
-        return Promise.reject('No posts or pages found using your query.');
-      }
-
-      if (articles.length === 1) {
-        // no menu if there is only one result
-        return Promise.resolve(articles[0]);
-      }
-
-      var entries = articles.map(function mapArts(article) {
-        return [article.title, ' (', chalk.green(article.source), ')'].join('');
-      });
-
-      return inquirer.prompt([
-        {
-          type: 'list',
-          name: 'selected',
-          message: 'Select the post or page you wish to rename.',
-          choices: entries,
-        },
-      ]).then(function getAnswer(answer) {
-        var pos = entries.indexOf(answer.selected);
-        return articles[pos];
-      });
-    }
-
-    function chooseRenameStyle(post) {
-      var message = '\n - Rename title (' + chalk.green.underline(post.title) + ') to ' +
-          chalk.cyan.underline(newName) + ' ?\n - Rename filename (' +
-          chalk.green.underline(post.source.substr(post.source.lastIndexOf(path.sep))) + ') to ' +
-          chalk.cyan.underline(slugize(newName, {transform: 1}) + '.md') + ' ?';
-
-      return inquirer.prompt([
-        {
-          type: 'list',
-          message: message,
-          name: 'answer',
-          choices: [
-            'Yes, rename both',
-            'Title only please (don\'t rename the file!)',
-            'Filename only please (don\'t rename the title!)',
-            'No, forget it, cancel everything.',
-          ],
-        },
-      ]).then(function processRes(response) {
-        var ans = response.answer;
-
-        switch (ans) {
-          case 'Yes, rename both':
-            return 'both';
-          case 'Title only please (don\'t rename the file!)':
-            return 'title';
-          case 'Filename only please (don\'t rename the title!)':
-            return 'filename';
-          default:
-            return Promise.reject('User cancelled rename operation');
-        }
-      });
-    }
-
-    function renameFile(art, renamed) {
-
-      var src = art.full_source;
-      var newSrc = path.join(src.substr(0, src.lastIndexOf(path.sep)), slugize(renamed, {transform: 1}));
-
-      // first the markdown file
-      return fsRename(src, newSrc + '.md').then(function doRenameMd() {
-        var fldr;
-
-        console.log(chalk.red(src) + ' renamed to ' + chalk.green(newSrc) + '.md');
-
-        fldr = src.substr(0, src.lastIndexOf('.'));
-
-        // then the folder if it exists
-        return fsStat(fldr).then(function doCheckDir(stats) {
-          if (stats.isDirectory()) {
-            return fsRename(fldr, newSrc).then(function doRenameDir() {
-              console.log(chalk.underline('Asset folder renamed as well.'));
-            });
+      loadArticles(this.locals)
+        .then(function select(arts) {
+          return selectArticle(arts);
+        })
+        .then(function selectRename(selected) {
+          selectedPost = selected;
+          return chooseRenameStyle(selectedPost);
+        })
+        .then(function process(renameStyle) {
+          if (renameStyle === 'filename') {
+            return renameFile(selectedPost, newName);
+          } else if (renameStyle === 'title') {
+            return renameTitle(selectedPost, newName);
           } else {
-            return 'Done';
+            return renameTitle(selectedPost, newName).then(function alsoFilename() {
+              return renameFile(selectedPost, newName);
+            });
           }
-        }).catch(function catchCheckDir() {
-          return console.log(chalk.underline('No asset folder found.'));
+        })
+        .catch(function catchAll(err) {
+          console.log(err.stack ? chalk.red(err.stack) : chalk.red('Error: ') + chalk.gray(err));
+          process.exit();
         });
-      });
 
-    }
+      function selectArticle(items) {
+        var articles = filterOnName(items, oldName);
 
-    function renameTitle(art, newTitle) {
-      var oldTitle = art.title;
-      var oldTitleString = new RegExp('title:.*');
+        if (articles.length === 0) {
+          return Promise.reject('No posts or pages found using your query.');
+        }
 
-      // change the title through the file system because changing it in the db caused issues
-      return fsReadFile(art.full_source, 'utf8').then(function doReadArt(data) {
-        var cont = data.replace(oldTitleString, 'title: "' + newTitle + '"');
+        if (articles.length === 1) {
+          // no menu if there is only one result
+          return Promise.resolve(articles[0]);
+        }
 
-        return fsWriteFile(art.full_source, cont, 'utf8').then(function doWriteArt() {
-          console.log(chalk.red(oldTitle) + ' renamed to ' + chalk.green(newTitle));
+        var entries = articles.map(function mapArts(article) {
+          return [article.title, ' (', chalk.green(article.source), ')'].join('');
         });
-      });
-    }
 
-    function loadArticles(locals) {
-      return Promise.resolve(locals.get('posts').toArray().concat(locals.get('pages').toArray()));
-    }
+        return inquirer
+          .prompt([
+            {
+              type: 'list',
+              name: 'selected',
+              message: 'Select the post or page you wish to rename.',
+              choices: entries
+            }
+          ])
+          .then(function getAnswer(answer) {
+            var pos = entries.indexOf(answer.selected);
+            return articles[pos];
+          });
+      }
 
-    function filterOnName(articles, terms) {
-      return articles.filter(function filterArts(article) {
-        return terms.every(function testRE(term) {
-          return term.test(article.title) || term.test(article.slug);
+      function chooseRenameStyle(post) {
+        var message =
+          '\n - Rename title (' +
+          chalk.green.underline(post.title) +
+          ') to ' +
+          chalk.cyan.underline(newName) +
+          ' ?\n - Rename filename (' +
+          chalk.green.underline(post.source.substr(post.source.lastIndexOf(path.sep))) +
+          ') to ' +
+          chalk.cyan.underline(slugize(newName, { transform: 1 }) + '.md') +
+          ' ?';
+
+        return inquirer
+          .prompt([
+            {
+              type: 'list',
+              message: message,
+              name: 'answer',
+              choices: [
+                'Yes, rename both',
+                "Title only please (don't rename the file!)",
+                "Filename only please (don't rename the title!)",
+                'No, forget it, cancel everything.'
+              ]
+            }
+          ])
+          .then(function processRes(response) {
+            var ans = response.answer;
+
+            switch (ans) {
+              case 'Yes, rename both':
+                return 'both';
+              case "Title only please (don't rename the file!)":
+                return 'title';
+              case "Filename only please (don't rename the title!)":
+                return 'filename';
+              default:
+                return Promise.reject('User cancelled rename operation');
+            }
+          });
+      }
+
+      function renameFile(art, renamed) {
+        var src = art.full_source;
+        var newSrc = path.join(src.substr(0, src.lastIndexOf(path.sep)), slugize(renamed, { transform: 1 }));
+
+        // first the markdown file
+        return fsRename(src, newSrc + '.md').then(function doRenameMd() {
+          var fldr;
+
+          console.log(chalk.red(src) + ' renamed to ' + chalk.green(newSrc) + '.md');
+
+          fldr = src.substr(0, src.lastIndexOf('.'));
+
+          // then the folder if it exists
+          return fsStat(fldr)
+            .then(function doCheckDir(stats) {
+              if (stats.isDirectory()) {
+                return fsRename(fldr, newSrc).then(function doRenameDir() {
+                  console.log(chalk.underline('Asset folder renamed as well.'));
+                });
+              } else {
+                return 'Done';
+              }
+            })
+            .catch(function catchCheckDir() {
+              return console.log(chalk.underline('No asset folder found.'));
+            });
         });
-      });
-    }
+      }
 
-  }.bind(this));
+      function renameTitle(art, newTitle) {
+        var oldTitle = art.title;
+        var oldTitleString = new RegExp('title:.*');
+
+        // change the title through the file system because changing it in the db caused issues
+        return fsReadFile(art.full_source, 'utf8').then(function doReadArt(data) {
+          var cont = data.replace(oldTitleString, 'title: "' + newTitle + '"');
+
+          return fsWriteFile(art.full_source, cont, 'utf8').then(function doWriteArt() {
+            console.log(chalk.red(oldTitle) + ' renamed to ' + chalk.green(newTitle));
+          });
+        });
+      }
+
+      function loadArticles(locals) {
+        return Promise.resolve(locals.get('posts').toArray().concat(locals.get('pages').toArray()));
+      }
+
+      function filterOnName(articles, terms) {
+        return articles.filter(function filterArts(article) {
+          return terms.every(function testRE(term) {
+            return term.test(article.title) || term.test(article.slug);
+          });
+        });
+      }
+    }.bind(this)
+  );
 };
-
