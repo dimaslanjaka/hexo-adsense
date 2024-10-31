@@ -6,6 +6,7 @@ import * as hexoUtil from 'hexo-util';
 import { HexoLocalsData } from 'hexo/dist/hexo/locals-d';
 import { minimatch } from 'minimatch';
 import path from 'path';
+import { md5FileSync } from 'sbg-utility';
 import { memoize } from 'underscore';
 import { fileURLToPath } from 'url';
 import Config from './config';
@@ -152,9 +153,11 @@ export function after_post_render(this: Hexo, data: any): any {
 function processAdsHtml(content: string, adshtml: string[], hexo: Hexo): string {
   const options = parseConfig(hexo);
   const replacement = memoize((adshtml: string[]) => {
+    const jsHash = md5FileSync(path.join(__dirname, 'source/article-ads.js'));
+    const cssHash = md5FileSync(path.join(__dirname, 'source/article-ads.css'));
     let replacement = `<div id="hexo-adsense-hidden" style="display:none">${adshtml.join('')}</div>`;
-    replacement += `<script src='${hexoUtil.url_for.call(hexo, '/hexo-adsense/article-ads.js')}'></script>`;
-    replacement += `<link rel="stylesheet" href='${hexoUtil.url_for.call(hexo, '/hexo-adsense/article-ads.css')}'>`;
+    replacement += `<script src='${hexoUtil.url_for.call(hexo, '/hexo-adsense/article-ads.js')}?hash=${jsHash}'></script>`;
+    replacement += `<link rel="stylesheet" href='${hexoUtil.url_for.call(hexo, '/hexo-adsense/article-ads.css')}?hash=${cssHash}'>`;
     return replacement;
   });
 
