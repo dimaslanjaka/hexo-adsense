@@ -83,12 +83,11 @@ function updateVersion() {
 gulp.task('update', updateVersion);
 
 async function copyDemo() {
-  await cp.async('npx', ['hexo', 'generate'], { cwd: path.join(__dirname, 'test/demo'), stdio: 'inherit' });
-  const dest = path.join(__dirname, '.deploy_git/docs/hexo-adsense');
+  const cwd = path.join(__dirname, 'test/demo');
+  await cp.async('npx', ['hexo', 'generate'], { cwd, stdio: 'inherit' });
+  const dest = path.join(__dirname, '.deploy_git/hexo-adsense');
   if (fs.existsSync(dest)) await fs.rm(dest, { force: true, recursive: true });
-  const stream = gulp
-    .src('./test/demo/public/**/*', { cwd: __dirname })
-    .pipe(gulp.dest('./.deploy_git/docs/hexo-adsense'));
+  const stream = gulp.src('public/**/*', { cwd }).pipe(gulp.dest('./.deploy_git/hexo-adsense'));
   await promiseStream(stream);
 }
 
