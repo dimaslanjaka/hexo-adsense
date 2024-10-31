@@ -3,8 +3,8 @@
 | version | tarball url |
 | :--- | :--- |
 | 2.0.0 | https://github.com/dimaslanjaka/hexo-adsense/raw/2f18ada/release/hexo-adsense-2.0.0.tgz |
-| 2.0.1 | https://github.com/dimaslanjaka/hexo-adsense/raw/bbb90b1/release/hexo-adsense-2.0.1.tgz |
-| latest | https://github.com/dimaslanjaka/hexo-adsense/raw/bbb90b1/release/hexo-adsense.tgz |
+| 2.0.1 | https://github.com/dimaslanjaka/hexo-adsense/raw/c5e3736/release/hexo-adsense-2.0.1.tgz |
+| latest | https://github.com/dimaslanjaka/hexo-adsense/raw/c5e3736/release/hexo-adsense.tgz |
 | latest | https://github.com/dimaslanjaka/hexo-adsense/raw/master/release/hexo-adsense.tgz |
 
 use this tarball with `resolutions`:
