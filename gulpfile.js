@@ -24,7 +24,7 @@ function promiseStream(stream) {
   });
 }
 
-function sourceJs() {
+export function sourceJs() {
   return gulp
     .src('./source/*.js')
     .pipe(
@@ -43,7 +43,10 @@ function sourceJs() {
         const b = browserify();
         b.add(file.path);
         b.bundle(function (err, result) {
-          if (err) return next(err);
+          if (err) {
+            console.log(err);
+            return next(err);
+          }
           file.contents = result;
           next(null, file);
         });
@@ -53,7 +56,7 @@ function sourceJs() {
     .pipe(gulp.dest('./dist/source'));
 }
 
-function sourceCss() {
+export function sourceCss() {
   return gulp
     .src('./source/*.css')
     .pipe(sourcemaps.init({ loadMaps: true }))
@@ -68,7 +71,7 @@ function sourceCss() {
     .pipe(gulp.dest('./dist/source'));
 }
 
-function sourceHtml() {
+export function sourceHtml() {
   return gulp
     .src('source/*.html')
     .pipe(
@@ -109,7 +112,7 @@ function updateVersion() {
 
 gulp.task('update', updateVersion);
 
-async function copyDemo() {
+export async function copyDemo() {
   const cwd = path.join(__dirname, 'test/demo');
   await cp.async('npx', ['hexo', 'generate'], { cwd, stdio: 'inherit' });
   const dest = path.join(__dirname, '.deploy_git/hexo-adsense');
@@ -118,11 +121,4 @@ async function copyDemo() {
   await promiseStream(stream);
 }
 
-export async function copy() {
-  await promiseStream(sourceJs());
-  await promiseStream(sourceHtml());
-  await promiseStream(sourceCss());
-  await copyDemo();
-}
-
-export default gulp.series(copy);
+export default gulp.series(sourceJs, sourceHtml, sourceCss, copyDemo);

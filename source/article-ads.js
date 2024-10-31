@@ -2,6 +2,8 @@
  * Browser processor
  */
 
+const uniqueId = () => '_' + Math.random().toString(36).substring(2, 9);
+
 const isBrowser = new Function('try {return this===window;}catch(e){ return false;}');
 
 /**
@@ -12,8 +14,8 @@ const hexoAdsenseConfig = JSON.parse(document.getElementById('hexo-adsense-confi
 
 /**
  * Insert after element
- * @param {HTMLElement} newElement
- * @param {HTMLElement} oldElement
+ * @param {HTMLElement|null} newElement
+ * @param {HTMLElement|null} oldElement
  */
 function insertAfter(newElement, oldElement) {
   if (oldElement && newElement) {
@@ -63,14 +65,16 @@ let createElementFromHTML = function (htmlString) {
 function newMethod() {
   console.log('new method initialize');
   const adshide = document.getElementById('hexo-adsense-hidden');
-  let adscont = Array.from(adshide.querySelectorAll('[hexo-adsense="ads-content"]'));
+  let adsSlots = Array.from(adshide.querySelectorAll('[hexo-adsense="ads-content"]')).filter(
+    (element) => !element.classList.contains('hexo-adsense-fill')
+  );
   let article = Array.from(document.querySelectorAll('article'));
   if (!article.length) {
     const post = document.querySelector('#post');
     if (post) article = [post];
   }
 
-  if (article.length > 0 && adscont.length > 0) {
+  if (article.length > 0 && adsSlots.length > 0) {
     /**
      * @type {HTMLElement}
      */
@@ -93,45 +97,36 @@ function newMethod() {
         // Define the attributes to filter out
         const attributesToFilter = ['data-ad-client', 'data-ad-slot', 'data-ad-format', 'data-full-width-responsive'];
 
-        const nonCustomFill = ads_fill.filter((element) => {
-          return !attributesToFilter.every((attr) => element.hasAttribute(attr));
-        });
-        for (let index = 0; index < nonCustomFill.length; index++) {
-          const adsToFill = nonCustomFill[index];
-          if (typeof adscont[index] !== 'undefined') {
-            adsToFill.appendChild(adscont[index]);
-          }
-        }
-
         const customFill = ads_fill.filter((element) => element.hasAttribute('data-ad-slot'));
         for (let i = 0; i < customFill.length; i++) {
           const originalElement = customFill[i];
-          // Create a new <ins> element
-          const newElement = document.createElement('ins');
+          // Create a new elements
+          const wrapIns = document.createElement('div');
+          const ins = document.createElement('ins');
 
           // Copy all attributes from the original element to the new <ins> element
           [...originalElement.attributes].forEach((attr) => {
-            newElement.setAttribute(attr.name, attr.value);
+            ins.setAttribute(attr.name, attr.value);
           });
 
           // Check if the newElement has the class 'adsbygoogle'; if not, add it
-          if (!newElement.classList.contains('adsbygoogle')) {
-            newElement.classList.add('adsbygoogle');
+          if (!ins.classList.contains('adsbygoogle')) {
+            ins.classList.add('adsbygoogle');
           }
 
-          // Check if the newElement has a style attribute; if not, set display to inline-block
-          if (!newElement.hasAttribute('style')) {
-            newElement.style.display = 'inline-block';
+          // Check if the newElement has a style attribute; if not, set display to block
+          if (!ins.hasAttribute('style')) {
+            ins.style.display = 'block';
           }
 
           // apply ad pub
-          if (!newElement.hasAttribute('data-ad-client')) {
-            newElement.setAttribute('data-ad-client', hexoAdsenseConfig.pub);
+          if (!ins.hasAttribute('data-ad-client')) {
+            ins.setAttribute('data-ad-client', hexoAdsenseConfig.pub);
           }
 
           // apply test ad
           if (hexoAdsenseConfig.development) {
-            newElement.setAttribute('data-adtest', 'on');
+            ins.setAttribute('data-adtest', 'on');
           }
 
           // Remove all attributes from the original element
@@ -139,30 +134,58 @@ function newMethod() {
             originalElement.removeAttribute(attr.name);
           });
 
-          // modify original element
-          originalElement.className = 'hexo-adsense-fill';
-          originalElement.setAttribute('hexo-adsense', 'ads-content');
-
           // Replace the original element with the new <ins> element
-          originalElement.appendChild(newElement);
+          wrapIns.appendChild(ins);
+          ins.id = uniqueId();
+          wrapIns.id = ins.id;
+          wrapIns.className = 'hexo-adsense-fill';
+          wrapIns.setAttribute('hexo-adsense', 'ads-content');
+
+          document.getElementById('hexo-adsense-hidden').appendChild(wrapIns);
+          originalElement.setAttribute('hexo-adsense-fill', ins.id);
+          // originalElement.replaceWith(wrapIns);
         }
+
+        // Retry non custom fill
+
+        const nonCustomFill = ads_fill.filter((element) => {
+          return !attributesToFilter.every((attr) => element.hasAttribute(attr));
+        });
+
+        // fill custom element first
+        nonCustomFill
+          .filter((element) => (element.getAttribute('hexo-adsense-fill') || '').length > 0)
+          .forEach((element) => {
+            const customId = element.getAttribute('hexo-adsense-fill') || '';
+            const ad = document.getElementById(customId);
+            element.appendChild(ad);
+          });
+
+        // fill empty element
+        nonCustomFill
+          .filter((element) => (element.getAttribute('hexo-adsense-fill') || '').length === 0)
+          .forEach((element) => {
+            const ad = adsSlots.shift();
+            if (ad) element.appendChild(ad);
+          });
       }
 
       // The rest of the ads will show automatically after headers elements
-      adscont = Array.from(adshide.querySelectorAll('[hexo-adsense="ads-content"]'));
       // Filter out elements that have the class 'hexo-adsense-fill'
-      adscont = adscont.filter((element) => !element.classList.contains('hexo-adsense-fill'));
+      adsSlots = Array.from(adshide.querySelectorAll('[hexo-adsense="ads-content"]')).filter(
+        (element) => !element.classList.contains('hexo-adsense-fill')
+      );
 
-      if (adscont.length > 0) {
-        console.log('Iterating headers', adscont.length, 'ads left');
+      if (adsSlots.length > 0) {
+        console.log('Iterating headers', adsSlots.length, 'ads left');
         const headers = targetArticle.querySelectorAll('h1,h2,h3,h4,h5,h6');
         if (headers.length > 0) {
           // generate index of headers
           let headers_index = Array.apply(null, { length: headers.length }).map(Number.call, Number);
           //console.log(headers_index);
-          for (let index = 0; index < adscont.length; index++) {
+          for (let index = 0; index < adsSlots.length; index++) {
             // ads = adscont[index];
-            ads = adscont.shift();
+            ads = adsSlots.shift();
             const rheaders = array_shuffle(headers_index);
             // pick a random index
             const rheader = rheaders.next().value;
@@ -174,8 +197,8 @@ function newMethod() {
         }
       }
 
-      if (adscont.length > 0) {
-        console.log('Iterating pre code', adscont.length, 'ads left');
+      if (adsSlots.length > 0) {
+        console.log('Iterating pre code', adsSlots.length, 'ads left');
 
         // Select all <pre> elements that are not inside a <td>
         const preElements = document.querySelectorAll('pre:not(td > pre)');
@@ -184,9 +207,9 @@ function newMethod() {
           // generate index of headers
           let preElements_index = Array.apply(null, { length: preElements.length }).map(Number.call, Number);
           //console.log(headers_index);
-          for (let index = 0; index < adscont.length; index++) {
+          for (let index = 0; index < adsSlots.length; index++) {
             // ads = adscont[index];
-            ads = adscont.shift();
+            ads = adsSlots.shift();
             const rPreElements = array_shuffle(preElements_index);
             // pick a random index
             const rPre = rPreElements.next().value;
@@ -199,8 +222,8 @@ function newMethod() {
       }
 
       // the rest of the ads will show automatically to linebreak elements
-      adscont = adshide.querySelectorAll('[hexo-adsense="ads-content"]');
-      if (adscont.length > 0) {
+      adsSlots = adshide.querySelectorAll('[hexo-adsense="ads-content"]');
+      if (adsSlots.length > 0) {
         const linebreaks = targetArticle.querySelectorAll('br,hr');
         if (linebreaks.length > 0) {
           // generate index of linebreaks
@@ -208,8 +231,8 @@ function newMethod() {
           //console.log(linebreaks_index);
           // randomize linebreaks index
           const rlinebreaks = array_shuffle(linebreaks_index);
-          for (let index = 0; index < adscont.length; index++) {
-            ads = adscont[index];
+          for (let index = 0; index < adsSlots.length; index++) {
+            ads = adsSlots[index];
             // pick a random index
             const rlinebreak = rlinebreaks.next().value;
             if (typeof rlinebreak == 'number') {
@@ -237,8 +260,8 @@ function newMethod() {
       let articles_index = Array.apply(null, { length: article.length }).map(Number.call, Number);
       // randomize linebreaks index
       const rArticles = array_shuffle(articles_index);
-      for (let index = 0; index < adscont.length; index++) {
-        ads = adscont[index];
+      for (let index = 0; index < adsSlots.length; index++) {
+        ads = adsSlots[index];
         // pick a random index
         const rArticle = rArticles.next().value;
         if (typeof rArticle == 'number') {
@@ -268,10 +291,15 @@ function* array_shuffle(array) {
 }
 
 function adsensePush() {
-  for (let index = 0; index < document.querySelectorAll('[hexo-adsense="ads-content"]').length; index++) {
-    (adsbygoogle = window.adsbygoogle || []).push({
-      google_ad_client: hexoAdsenseConfig.pub
-    });
+  const elements = document.querySelectorAll('[hexo-adsense="ads-content"]');
+  for (let i = 0; i < elements.length; i++) {
+    try {
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: hexoAdsenseConfig.pub
+      });
+    } catch (_e) {
+      //
+    }
   }
 }
 
