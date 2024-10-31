@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json.schemastore.org/nodemon",
+  "exec": "clear && yarn run build && yarn run pack",
+  "watch": [
+    "./src/**/*.{ts,cjs,mjs,js}",
+    "./src/**/*.xml",
+    "./src/**/*.xsl",
+    "./rollup*.*",
+    "./gulp*.*",
+    "./package.json"
+  ],
+  "ignore": [
+    "*.test.js",
+    ".vscode",
+    ".gitignore",
+    "gh-pages",
+    "**/dist/**",
+    "tests",
+    "**/node_modules/**",
+    "test",
+    "tmp",
+    "temp",
+    "**/tmp/**"
+  ],
+  "delay": 3000,
+  "ext": "js,cjs,mjs,ts,xml,xsl",
+  "verbose": false
+}

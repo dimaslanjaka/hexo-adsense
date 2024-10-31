@@ -1,5 +1,5 @@
 # hexo-adsense
-Hexo adsense support 
+Hexo adsense support
 
 # Features
 - can display adsense to all pages except specific posts or pages (multiple supported)
@@ -7,7 +7,7 @@ Hexo adsense support
 - adsense javascript enchantments (lazy adsense included)
 - support display adsense on localhost
 - random display banner ads
-- automated display in random positions of pseudo html elements (such as header, new line `<br/>`, after pretext `<pre/>`) useful for increasing **RPM** and **CTR** Adsense Prices.
+- automated display in random positions of pseudo html elements (such as headers (`</h[n]>`), new line `<br/>`, after pretext `<pre/>`) useful for increasing **RPM** and **CTR** Adsense Prices.
 
 # Demos
 - [My Blog www.webmanajemen.com](https://www.webmanajemen.com/NodeJS/eslint-prettier-typescript-vscode.html)
@@ -25,19 +25,22 @@ npm i hexo-adsense
 ```
 
 ### _config.yml
+
 ```yaml
 # https://github.com/dimaslanjaka/hexo-adsense
 adsense:
   # enable(true) or disable(false)
   enable: true
   # ca-pub-xxxx
-  pub: ca-pub-1165447249910969
-  # in-article ads source
-  article_ads:
-    - "source/ads/in_article.html"
-    - "source/ads/in_article2.html"
+  pub: ca-pub-01234567989xx
+  # enable in-article
+  # boolean = by scanning source_dir/_data/hexo-adsense/*.html
+  # array of files = only read spesific html files
+  article_ads: true
   # ads field
-  field: "site" # post=only post, site=all pages and posts
+  # post = only post
+  # site = all pages and posts
+  field: "site"
   # auto redirect to https
   https: true
   # block user with adblock enabled

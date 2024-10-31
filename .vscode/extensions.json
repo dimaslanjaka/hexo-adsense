@@ -2,6 +2,7 @@
   "recommendations": [
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
-    "monosans.djlint"
+    "monosans.djlint",
+    "ginfuru.better-nunjucks"
   ]
 }

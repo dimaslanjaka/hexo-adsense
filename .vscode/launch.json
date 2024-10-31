@@ -5,23 +5,25 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "command": "hexo server",
-      "name": "[DEV] server",
+      "command": "hexo server --ssl",
+      "name": "dev server",
       "request": "launch",
       "env": {
-        "NODE_ENV": "development"
+        "NODE_ENV": "development",
+        "DEBUG": "hexo-adsense,hexo-adsense:*"
       },
-      "cwd": "${workspaceFolder}/../../",
+      "cwd": "${workspaceFolder}/test/demo",
       "type": "node-terminal"
     },
     {
-      "command": "hexo server",
-      "name": "[DEV] Demo Server",
+      "command": "hexo server --ssl",
+      "name": "prod server",
       "request": "launch",
       "env": {
-        "NODE_ENV": "development"
+        "NODE_ENV": "production",
+        "DEBUG": "hexo-adsense,hexo-adsense:*"
       },
-      "cwd": "${workspaceFolder}/test/demo/",
+      "cwd": "${workspaceFolder}/test/demo",
       "type": "node-terminal"
     }
   ]

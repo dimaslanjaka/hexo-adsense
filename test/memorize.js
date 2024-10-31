@@ -1,4 +1,4 @@
-const utils = require("../lib/utils.js");
+const utils = require('../tmp/dist/src/utils.js');
 const memoize = utils.memoize;
 const factorial = memoize((x) => {
   if (x === 0) {

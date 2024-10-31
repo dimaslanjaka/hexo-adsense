@@ -1,87 +1,69 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-shadow */
-/* eslint-disable no-console */
-/* eslint-disable new-cap */
-/* eslint-disable @typescript-eslint/no-var-requires */
-const { exec } = require("child_process");
-const { writeFileSync, readFileSync } = require("fs");
-const versionParser = require("./src/versionParser");
-const readline = require("readline");
+import { exec } from 'child_process';
+import { writeFileSync, readFileSync } from 'fs';
+import versionParser from './tmp/dist/src/versionParser.js';
+import readline from 'readline';
+import Moment from 'moment';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-const rl = readline.createInterface(process.stdin, process.stdout);
-const packages = require("./package.json");
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+const packages = JSON.parse(readFileSync('./package.json'));
 
 const version = new versionParser(packages.version);
-const Moment = require("moment");
-const { join } = require("path");
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 function updateChangelog(callback) {
   exec('git log --reflog --pretty=format:"%h : %s %b %ad" --not --remotes', (err, stdout, stderr) => {
     const std = stdout
-      .split("\n")
-      .filter(
-        /**
-         * filter non-empty
-         * @param {string} el
-         * @returns {boolean}
-         */
-        function (el) {
-          return el != null && el.trim().length > 0;
-        }
-      )
-      .map(
-        /**
-         * Trim
-         * @param {string} str
-         * @returns {string}
-         */
-        function (str) {
-          return str.trim();
-        }
-      );
-    const date = Moment().format("YYYY-MM-DDTHH:mm:ss");
+      .split('\n')
+      .filter((el) => el != null && el.trim().length > 0)
+      .map((str) => str.trim());
+    const date = Moment().format('YYYY-MM-DDTHH:mm:ss');
     let build = `\n\n## [${packages.version}] ${date}\n`;
     std.forEach((str) => {
       build += `- ${str}\n`;
     });
 
-    const changelog = join(__dirname, "CHANGELOG.md");
+    const changelog = join(__dirname, 'CHANGELOG.md');
     let readChangelog = readFileSync(changelog).toString().trim();
     readChangelog += build;
     writeFileSync(changelog, readChangelog);
-    if (typeof callback === "function") callback();
+    if (typeof callback === 'function') callback();
   });
 }
 
-if (typeof version === "object") {
-  rl.question("Overwrite? [yes]/no: ", function (answer) {
-    if (answer.toLowerCase() === "no" || answer.toLowerCase() === "n") {
-      console.log("Publish Cancel");
+if (typeof version === 'object') {
+  rl.question('Overwrite? [yes]/no: ', (answer) => {
+    if (answer.toLowerCase() === 'no' || answer.toLowerCase() === 'n') {
+      console.log('Publish Cancel');
     } else {
-      console.log("Updating version");
+      console.log('Updating version');
       version.result.build++;
       packages.version = version.toString();
-      writeFileSync("./package.json", JSON.stringify(packages, null, 2));
-      console.log("Compiling...");
-      exec("tsc -p tsconfig.json", (err, stdout, stderr) => {
+      writeFileSync('./package.json', JSON.stringify(packages, null, 2));
+      console.log('Compiling...');
+      exec('tsc -p tsconfig.json', (err, stdout, stderr) => {
         if (!err) {
-          console.log("Build Typescript Successfully");
-          console.log("Publishing");
-          exec("npm publish", (err, stdout, stderr) => {
-            console.log("Packages Published Successfully");
+          console.log('Build Typescript Successfully');
+          console.log('Publishing');
+          exec('npm publish', (err, stdout, stderr) => {
+            console.log('Packages Published Successfully');
 
             // add to git
             updateChangelog(() => {
-              exec("git add .", (err) => {
+              exec('git add .', (err) => {
                 if (!err) exec(`git commit -m "Update release ${version.toString()}"`);
               });
             });
           });
         } else {
-          console.log("Publish Failed, Rollback version");
+          console.log('Publish Failed, Rollback version');
           version.result.build--;
           packages.version = version.toString();
-          writeFileSync("./package.json", JSON.stringify(packages, null, 2));
+          writeFileSync('./package.json', JSON.stringify(packages, null, 2));
 
           console.log(stderr);
           throw err;

@@ -21,7 +21,7 @@
   "scripts": {
     "lint": "eslint --ext .js,.jsx,.ts,.d.ts,.tsx ./",
     "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.d.ts,.tsx ./",
-    "build": "tsc -b tsconfig.build.json && gulp && rollup -c",
+    "build": "tsc -b tsconfig.build.json && rollup -c && gulp",
     "clean": "rimraf -rf dist tmp && npm run build",
     "update": "npx npm-check-updates -u -x hexo,chalk",
     "patch": "npm version patch",
@@ -33,8 +33,7 @@
     "clone:docs": "git clone https://github.com/dimaslanjaka/docs.git .deploy_git"
   },
   "files": [
-    "dist/",
-    "packages/"
+    "dist/"
   ],
   "workspaces": [
     "test/demo"
@@ -45,6 +44,7 @@
     "adsense",
     "in-article-ads"
   ],
+  "homepage": "https://www.webmanajemen.com/docs/hexo-adsense",
   "author": {
     "name": "Dimas Lanjaka",
     "email": "dimaslanjaka@gmail.com",
@@ -57,14 +57,14 @@
     "bluebird": "^3.7.2",
     "fs-extra": "^11.2.0",
     "glob": "^11.0.0",
-    "hexo-cli-extras": "file:packages/hexo-cli-extras",
-    "hexo-extend-injector2": "file:packages/hexo-extend-injector2",
     "hexo-fs": "^4.1.3",
     "hexo-is": "^2.0.1",
     "hexo-log": "^4.1.0",
     "hexo-util": "^3.3.0",
     "jsdom": "^25.0.1",
+    "lodash": "^4.17.21",
     "minimatch": "^10.0.1",
+    "minimist": "^1.2.8",
     "moment": "^2.30.1",
     "node-html-parser": "^6.1.13",
     "object-assign": "^4.1.1",
@@ -91,11 +91,14 @@
     "@types/gulp": "^4.0.17",
     "@types/gulp-sourcemaps": "^0.0.38",
     "@types/jsdom": "^21.1.7",
+    "@types/lodash": "^4",
+    "@types/minimist": "^1",
     "@types/node": "^22.8.1",
     "@types/object-assign": "^4",
     "@types/underscore": "^1",
     "@typescript-eslint/eslint-plugin": "^8.11.0",
     "@typescript-eslint/parser": "^8.11.0",
+    "cross-spawn": "^7.0.3",
     "eslint": "^9.13.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.31.0",
@@ -134,7 +137,7 @@
     "hexo-is": "https://github.com/dimaslanjaka/hexo-is/raw/master/release/hexo-is.tgz",
     "hexo-log": "https://github.com/dimaslanjaka/hexo/raw/monorepo-v7/releases/hexo-log.tgz",
     "hexo-post-parser": "https://github.com/dimaslanjaka/hexo-post-parser/raw/d9f3a9ba3585188dfb30159ff588b709f0238326/release/hexo-post-parser.tgz",
-    "hexo-renderers": "https://github.com/dimaslanjaka/hexo-renderers/raw/add4a2491075dd85281a5dc0c48b74a7ce51d987/release/hexo-renderers.tgz",
+    "hexo-renderers": "https://github.com/dimaslanjaka/hexo-renderers/raw/0534154ea2bbc4a06fe347861e8ebfc7a722c10f/release/hexo-renderers.tgz",
     "hexo-seo": "https://github.com/dimaslanjaka/hexo-seo/raw/7729b4246934d7319c4bcacbbe01a3748b5f5056/release/hexo-seo.tgz",
     "hexo-server": "https://github.com/dimaslanjaka/hexo/raw/monorepo-v7/releases/hexo-server.tgz",
     "hexo-shortcodes": "https://github.com/dimaslanjaka/hexo-shortcodes/raw/f70a1c0/release/hexo-shortcodes.tgz",

@@ -1,0 +1,29 @@
+{
+  "/release/hexo-adsense-2.0.0.tgz": {
+    "integrity": {
+      "sha1": "1ccd42c29cec4a3a638b02a3fae1d437adceff36",
+      "sha256": "gV7QRv4J1FWJf7rzJKjuAUmssk5ynqfZIIGMTEAF1kc=",
+      "md5": "7f8a7e9aa0d51025920f91efe57b36ef",
+      "sha512": "wWdxOK1HeyLzUfkfJkLfdCo31cCXtEBchd4ilrOCZGZmdSplIUy1SRcn4QUcen5kp7WCPeHXNHMi+1HQceFxog=="
+    },
+    "size": "79.59 KB"
+  },
+  "/release/hexo-adsense.tgz": {
+    "integrity": {
+      "sha1": "1ccd42c29cec4a3a638b02a3fae1d437adceff36",
+      "sha256": "gV7QRv4J1FWJf7rzJKjuAUmssk5ynqfZIIGMTEAF1kc=",
+      "md5": "7f8a7e9aa0d51025920f91efe57b36ef",
+      "sha512": "wWdxOK1HeyLzUfkfJkLfdCo31cCXtEBchd4ilrOCZGZmdSplIUy1SRcn4QUcen5kp7WCPeHXNHMi+1HQceFxog=="
+    },
+    "size": "79.59 KB"
+  },
+  "/yarn.lock": {
+    "integrity": {
+      "sha1": "cfdc603e9a6090c65fe7db5f611723a7d050eeba",
+      "sha256": "mE8v4CrjhYYo7+COLv/+OQIGiGao2rznCZ8XoIWyv7M=",
+      "md5": "35e5ebf4b27b93431c6bd2a4e8229d4d",
+      "sha512": "1ouIcQXsCp1Scrsk7JnOWOqrzBSGrrmb37w8L8r2zyiYBJ+L8G8EWX5xZR7dRFk91gENl66DYYr/UuL0gXQyCw=="
+    },
+    "size": "448.63 KB"
+  }
+}
