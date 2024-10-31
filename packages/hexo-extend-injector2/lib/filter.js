@@ -1,12 +1,13 @@
 'use strict';
 
-const injectFilter = injector => (data, locals) => {
-
+const injectFilter = (injector) => (data, locals) => {
   function inject(data, pattern, flag, isBegin = true) {
     if (injector.config[`injector_point_${injector.formatKey(flag)}`]) return data;
-    const code = injector.get(flag, {context: locals}).text();
+    const code = injector.get(flag, { context: locals }).text();
     if (!code.length) return data;
-    return data.replace(pattern, str => { return isBegin ? str + code : code + str; });
+    return data.replace(pattern, (str) => {
+      return isBegin ? str + code : code + str;
+    });
   }
 
   // Inject head_begin

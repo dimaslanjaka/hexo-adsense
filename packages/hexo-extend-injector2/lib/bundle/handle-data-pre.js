@@ -6,11 +6,11 @@
  * injector.register('css', {path: 'xxxx.css'});
  */
 
-const {resolve} = require('path');
+const { resolve } = require('path');
 
 module.exports = (ctx, data, suffixes = []) => {
   if (data.path) {
-    data.value = () => ctx.render.render({path: resolve(ctx.base_dir, data.path)});
+    data.value = () => ctx.render.render({ path: resolve(ctx.base_dir, data.path) });
     return;
   }
   if (data.text) {
@@ -21,7 +21,7 @@ module.exports = (ctx, data, suffixes = []) => {
     const str = data.value;
     for (const suffix of suffixes) {
       if (str.endsWith(suffix)) {
-        data.value = () => ctx.render.render({path: resolve(ctx.base_dir, str)});
+        data.value = () => ctx.render.render({ path: resolve(ctx.base_dir, str) });
         return;
       }
     }

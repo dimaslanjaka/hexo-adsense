@@ -31,7 +31,7 @@ class ViewInject {
     if (path.extname(name) === '') {
       name += defaultExtname;
     }
-    this.raws.push({name, raw, args});
+    this.raws.push({ name, raw, args });
   }
   file(name, file, ...args) {
     // Set default extname from file's extname
@@ -46,27 +46,25 @@ class ViewInject {
 // Init injects
 function initInject(base_dir) {
   const injects = {};
-  points.styles.forEach(item => {
+  points.styles.forEach((item) => {
     injects[item] = new StylusInject(base_dir);
   });
-  points.views.forEach(item => {
+  points.views.forEach((item) => {
     injects[item] = new ViewInject(base_dir);
   });
   return injects;
 }
 
-
 module.exports = (ctx, injector) => {
-
   ctx.on('generateBefore', () => {
     const injects = initInject(ctx.base_dir);
     ctx.execFilterSync('theme_inject', injects);
     // stylus
-    points.styles.forEach(type => {
-      injects[type].files.forEach(file => injector.register(type, file, () => true, 10, true));
+    points.styles.forEach((type) => {
+      injects[type].files.forEach((file) => injector.register(type, file, () => true, 10, true));
     });
     // view
-    points.views.forEach(type => {
+    points.views.forEach((type) => {
       injects[type].raws
         .map((injectObj, index) => {
           const name = injectObj.name;
@@ -77,11 +75,11 @@ module.exports = (ctx, injector) => {
           const locals = injectObj.args[0];
           const options = injectObj.args[1];
           const order = injectObj.args[2] || index;
-          const value = ctx => ctx.partial(layout, locals, options);
+          const value = (ctx) => ctx.partial(layout, locals, options);
           return { value, priority: order, name, layout, locals, options, isRun: true };
         })
         .sort((a, b) => b.priority - a.priority)
-        .forEach(data => injector.register(type, data));
+        .forEach((data) => injector.register(type, data));
     });
   });
 };

@@ -4,7 +4,7 @@ const Injector = require('./injector');
 const { join } = require('path');
 const { readFileSync } = require('fs');
 
-const loadInjector = ctx => {
+const loadInjector = (ctx) => {
   const { filter } = ctx.extend;
 
   // Init injector
@@ -25,9 +25,13 @@ const loadInjector = ctx => {
   const themeD = JSON.parse(readFileSync(join(ctx.theme_dir, 'package.json'), 'utf-8'));
   if (themeD.name === 'hexo-theme-next') {
     if (config.load_next_compatible) {
-      filter.register('after_init', () => {
-        injector.registerNexTHelper();
-      }, order.REGISTER_NEXT_HELPER);
+      filter.register(
+        'after_init',
+        () => {
+          injector.registerNexTHelper();
+        },
+        order.REGISTER_NEXT_HELPER
+      );
     }
   } else {
     if (config.load_next_plugin) {

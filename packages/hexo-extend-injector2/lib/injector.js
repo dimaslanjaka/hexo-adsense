@@ -24,18 +24,20 @@ class Injector {
 
   get(entry, options) {
     entry = this.formatKey(entry);
-    options = Object.assign({context: this._ctx}, options);
+    options = Object.assign({ context: this._ctx }, options);
     const ctx = options.context;
 
     const _storeEntries = Array.from(this._store[entry] || []);
     const _runEntries = Array.from(this._run[entry] || []);
 
-    const list = () => _storeEntries.concat(_runEntries)
-      .filter(item => item.predicate(ctx, options))
-      .sort((a, b) => a.priority - b.priority);
+    const list = () =>
+      _storeEntries
+        .concat(_runEntries)
+        .filter((item) => item.predicate(ctx, options))
+        .sort((a, b) => a.priority - b.priority);
 
-    const rendered = () => list()
-      .map(item => {
+    const rendered = () =>
+      list().map((item) => {
         const renderItem = Object.assign({}, item);
         if (typeof item.value === 'function') {
           renderItem.value = item.value(ctx, options);
@@ -43,14 +45,14 @@ class Injector {
         return renderItem;
       });
 
-    const text = (sep = '') => rendered()
-      .map(item => item.value)
-      .join(sep);
+    const text = (sep = '') =>
+      rendered()
+        .map((item) => item.value)
+        .join(sep);
 
-    const toPromise = () => rendered()
-      .map(item => Promise.resolve(item.value));
+    const toPromise = () => rendered().map((item) => Promise.resolve(item.value));
 
-    return {list, rendered, text, toPromise};
+    return { list, rendered, text, toPromise };
   }
 
   getSize(entry) {
@@ -76,7 +78,7 @@ class Injector {
       options.predicate = this.is(options.predicate);
     }
 
-    this._ctx.execFilterSync('injector2:register', options, {args: [entry]});
+    this._ctx.execFilterSync('injector2:register', options, { args: [entry] });
     this._ctx.execFilterSync(`injector2:register-${entry}`, options);
 
     store[entry].push(options);
@@ -84,7 +86,7 @@ class Injector {
   }
 
   is(...types) {
-    return locals => {
+    return (locals) => {
       for (const type of types) {
         if (type === 'home' && locals.page.__index) return true;
         if (type === 'post' && locals.page.__post) return true;
@@ -110,7 +112,7 @@ class Injector {
   registerHelper() {
     const self = this;
     const { helper } = this._ctx.extend;
-    helper.register('injector', function(point) {
+    helper.register('injector', function (point) {
       return require('./helper/injector')(self, this)(point);
     });
   }
@@ -119,7 +121,7 @@ class Injector {
     // 为了能覆盖主题中的注册，请在after_init中调用
     const self = this;
     const { helper } = this._ctx.extend;
-    helper.register('next_inject', function(point) {
+    helper.register('next_inject', function (point) {
       return require('./helper/next-inject')(self, this)(point);
     });
   }

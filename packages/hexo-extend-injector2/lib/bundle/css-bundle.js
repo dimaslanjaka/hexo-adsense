@@ -3,7 +3,6 @@
 const handleDataPre = require('./handle-data-pre');
 const cssGenerator = require('./css-generator');
 
-
 const loadCss = (ctx, injector, config) => {
   const { generator } = ctx.extend;
   const { options, file, env } = config;
@@ -29,11 +28,9 @@ const loadCss = (ctx, injector, config) => {
       data: cssGenerator(injector, env, options)
     };
   });
-
 };
 
 module.exports = (ctx, injector) => {
-
   const config = injector.config.css;
 
   if (!config.enable) return;
@@ -42,11 +39,11 @@ module.exports = (ctx, injector) => {
 
   const { REGISTER_VARIABLE, REGISTER_STYLE } = injector.order;
 
-  filter.register('injector2:register-variable', data => {
+  filter.register('injector2:register-variable', (data) => {
     data.priority = REGISTER_VARIABLE;
     injector.register('css', data);
   });
-  filter.register('injector2:register-style', data => {
+  filter.register('injector2:register-style', (data) => {
     data.priority = REGISTER_STYLE;
     injector.register('css', data);
   });
@@ -63,17 +60,16 @@ module.exports = (ctx, injector) => {
 
   const isLoadCss = {};
 
-  filter.register('injector2:register-css', data => {
+  filter.register('injector2:register-css', (data) => {
     const env = data.env || 'default';
     data.env = env;
     const file = config.path[env];
     const options = config.options;
     if (file && !isLoadCss[env]) {
-      loadCss(ctx, injector, {options, env, file});
+      loadCss(ctx, injector, { options, env, file });
       isLoadCss[env] = true;
     }
     handleDataPre(ctx, data, ['.css', '.sass', '.styl']);
     data.predicate = (ctx, options) => options.env === env;
   });
-
 };

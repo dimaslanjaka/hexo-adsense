@@ -22,7 +22,6 @@ const loadJsScript = (ctx, injector, config) => {
 };
 
 module.exports = (ctx, injector) => {
-
   const config = injector.config.js;
 
   if (!config.enable) return;
@@ -31,12 +30,11 @@ module.exports = (ctx, injector) => {
 
   let isLoadJsScript = false;
 
-  filter.register('injector2:register-js', data => {
+  filter.register('injector2:register-js', (data) => {
     if (!isLoadJsScript) {
       loadJsScript(ctx, injector, config);
       isLoadJsScript = true;
     }
     handleDataPre(ctx, data, ['.js']);
   });
-
 };

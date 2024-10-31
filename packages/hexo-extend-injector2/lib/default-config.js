@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = {
-
   /**
    * Injector Point
    * If helper used, it will set injector_point_<key> to true
@@ -48,5 +47,4 @@ module.exports = {
     },
     options: {}
   }
-
 };

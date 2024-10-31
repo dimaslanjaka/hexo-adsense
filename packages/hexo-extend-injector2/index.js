@@ -2,7 +2,7 @@
 
 // const { resolve } = require('path');
 
-module.exports = ctx => {
+module.exports = (ctx) => {
   // If initialized, return the result
   if (ctx.extend.injector2) {
     return ctx.extend.injector2;
