@@ -5,10 +5,10 @@
 const isBrowser = new Function('try {return this===window;}catch(e){ return false;}');
 
 /**
- * @type {import("../src/config")}
+ * @type {import("../src/config").DefaultConfig}
  */
 const hexoAdsenseConfig = JSON.parse(document.getElementById('hexo-adsense-config').textContent);
-//console.log(hexoAdsenseConfig);
+// console.log(hexoAdsenseConfig);
 
 /**
  * Insert after element
@@ -90,16 +90,68 @@ function newMethod() {
 
       if (ads_fill.length > 0) {
         console.log('found hexo-adsense-fill', ads_fill.length);
-        for (let index = 0; index < ads_fill.length; index++) {
-          const toFill = ads_fill[index];
+        // Define the attributes to filter out
+        const attributesToFilter = ['data-ad-client', 'data-ad-slot', 'data-ad-format', 'data-full-width-responsive'];
+
+        const nonCustomFill = ads_fill.filter((element) => {
+          return !attributesToFilter.every((attr) => element.hasAttribute(attr));
+        });
+        for (let index = 0; index < nonCustomFill.length; index++) {
+          const adsToFill = nonCustomFill[index];
           if (typeof adscont[index] !== 'undefined') {
-            toFill.appendChild(adscont[index]);
+            adsToFill.appendChild(adscont[index]);
           }
+        }
+
+        const customFill = ads_fill.filter((element) => element.hasAttribute('data-ad-slot'));
+        for (let i = 0; i < customFill.length; i++) {
+          const originalElement = customFill[i];
+          // Create a new <ins> element
+          const newElement = document.createElement('ins');
+
+          // Copy all attributes from the original element to the new <ins> element
+          [...originalElement.attributes].forEach((attr) => {
+            newElement.setAttribute(attr.name, attr.value);
+          });
+
+          // Check if the newElement has the class 'adsbygoogle'; if not, add it
+          if (!newElement.classList.contains('adsbygoogle')) {
+            newElement.classList.add('adsbygoogle');
+          }
+
+          // Check if the newElement has a style attribute; if not, set display to inline-block
+          if (!newElement.hasAttribute('style')) {
+            newElement.style.display = 'inline-block';
+          }
+
+          // apply ad pub
+          if (!newElement.hasAttribute('data-ad-client')) {
+            newElement.setAttribute('data-ad-client', hexoAdsenseConfig.pub);
+          }
+
+          // apply test ad
+          if (hexoAdsenseConfig.development) {
+            newElement.setAttribute('data-adtest', 'on');
+          }
+
+          // Remove all attributes from the original element
+          [...originalElement.attributes].forEach((attr) => {
+            originalElement.removeAttribute(attr.name);
+          });
+
+          // modify original element
+          originalElement.className = 'hexo-adsense-fill';
+          originalElement.setAttribute('hexo-adsense', 'ads-content');
+
+          // Replace the original element with the new <ins> element
+          originalElement.appendChild(newElement);
         }
       }
 
-      // the rest of the ads will show automatically after headers elements
+      // The rest of the ads will show automatically after headers elements
       adscont = Array.from(adshide.querySelectorAll('[hexo-adsense="ads-content"]'));
+      // Filter out elements that have the class 'hexo-adsense-fill'
+      adscont = adscont.filter((element) => !element.classList.contains('hexo-adsense-fill'));
 
       if (adscont.length > 0) {
         console.log('Iterating headers', adscont.length, 'ads left');

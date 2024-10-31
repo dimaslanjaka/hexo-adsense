@@ -52,7 +52,9 @@ adsense:
 ```
 
 ### Article Ads
+
 > include to config article_ads
+
 ```yaml
 adsense:
   article_ads:
@@ -114,6 +116,20 @@ tags:
   - tags1
   - tags2
 ```
+
+## Prioritize ads fill on spesific element
+
+You can adjust where the ads should be visible by using `<div hexo-adsense-fill=""></div>` everywhere. [[Reference](https://github.com/dimaslanjaka/hexo-adsense/blob/27634e629ce3360eac9b31a7724e7d193aaab1f3/source/article-ads.js#L83)]
+
+You also can adjust with independent ads (_dont use same adsense ads id_).
+
+```html
+<div hexo-adsense-fill="" style="display:block" data-ad-client="ca-pub-1048456668116270" data-ad-slot="5659161378" data-ad-format="auto" data-full-width-responsive="true"></div>
+<!-- or you can remove ad-client and style attribute -->
+<div hexo-adsense-fill="" data-ad-slot="5659161378" data-ad-format="auto" data-full-width-responsive="true"></div>
+```
+
+Above codes will converted into adsense ads automatically.
 
 ## Footnote
 first development finished on 12 November 2021
