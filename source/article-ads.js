@@ -80,7 +80,14 @@ function newMethod() {
       let targetArticle = article[0];
 
       // prioritize hexo-adsense-fill before auto ads on other elements
-      const ads_fill = targetArticle.querySelectorAll('*[hexo-adsense-fill]');
+      const ads_fill = Array.from(
+        new Set(
+          Array.from(targetArticle.querySelectorAll('*[hexo-adsense-fill]')).concat(
+            Array.from(document.querySelectorAll('*[hexo-adsense-fill]'))
+          )
+        )
+      );
+
       if (ads_fill.length > 0) {
         console.log('found hexo-adsense-fill', ads_fill.length);
         for (let index = 0; index < ads_fill.length; index++) {
