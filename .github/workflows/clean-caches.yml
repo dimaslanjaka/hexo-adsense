@@ -1,0 +1,105 @@
+name: Clean GitHub Actions Cache
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+  workflow_call:
+    secrets:
+      ACCESS_TOKEN:
+        required: true
+
+jobs:
+  clean-cache:
+    runs-on: windows-latest
+    env:
+      PIP_CACHE_DIR: '${{ github.workspace }}/project/tmp/pip'
+      NUITKA_CACHE_DIR: '${{ github.workspace }}/project/tmp/nuitka-cache'
+      NODE_OPTIONS: '--max_old_space_size=4096' #8192 4096 --expose-gc
+      YARN_ENABLE_IMMUTABLE_INSTALLS: false
+      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      node_version: 18.x
+      php_version: 7.4
+      YARN_CHECKSUM_BEHAVIOR: update
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          lfs: true
+
+      - name: Update Submodules
+        run: |
+          echo "init submodules"
+          git submodule init
+          git submodule foreach "git submodule init"
+          echo "sync submodules"
+          git submodule sync
+          git submodule foreach "git submodule sync"
+          echo "update submodules"
+          mkdir -p bin >/dev/null 2>&1
+          curl -L https://github.com/dimaslanjaka/bin/raw/master/bin/submodule-install > bin/submodule-install
+          rm -rf .git/modules
+          bash ./bin/submodule-install
+          git lfs track "*.rar"
+        shell: bash
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          architecture: 'x64'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+
+      - name: Get pip cache dir
+        id: pip-cache
+        run: echo "pip_cache_dir=$(pip cache dir)" >> $GITHUB_ENV
+
+      - name: Setup Cache
+        id: cache
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            ${{ env.pip_cache_dir }}
+            ${{ env.NUITKA_CACHE_DIR }}
+            ~/.cache/pip
+            **/yarn.lock
+            ./site/db.json
+            ./site/public
+            ./site/tmp
+            ./site/source/_posts
+            ./site/multisite/chimeraland/tmp
+            ./site/src-posts/chimeraland
+            **/dist
+            **/.yarn/cache*
+            **/node_modules
+            ./tmp
+          key: mySiteCache-${{ hashFiles('**/.husky/hash.txt', '_config.yml', '**/yarn.lock') }}
+          restore-keys: |
+            mySiteCache-
+            mySiteCache
+
+      - name: Install Dependencies
+        run: |
+          corepack enable
+          yarn install
+
+      - name: Clean github actions cache
+        env:
+          GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        shell: cmd
+        run: |
+          call "${{ github.workspace }}/bin/clear-github-actions-cache.cmd"
+
+      - name: Crontab runner
+        env:
+          GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        shell: bash
+        run: |
+          bash "${{ github.workspace }}/.crontab.sh"
