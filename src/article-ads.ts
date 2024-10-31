@@ -4,7 +4,6 @@ import fs from 'hexo-fs';
 import { default as hexoIs } from 'hexo-is';
 import * as hexoUtil from 'hexo-util';
 import { HexoLocalsData } from 'hexo/dist/hexo/locals-d';
-import { minimatch } from 'minimatch';
 import path from 'path';
 import { md5FileSync } from 'sbg-utility';
 import { memoize } from 'underscore';
@@ -64,23 +63,6 @@ function articleAds(files: string[], hexo: Hexo): string[] {
   });
 
   return result;
-}
-
-function _after_generate(this: Hexo) {
-  const hexo = this;
-  const route = hexo.route;
-  const options = parseConfig(hexo);
-
-  const routes = route.list().filter((path0) => {
-    let choose = minimatch(path0, '**/*.{htm,html}', { nocase: true });
-    if (typeof options.exclude !== 'undefined') {
-      choose = choose && !utils.isIgnore(path0, options.exclude, this);
-    }
-    if (typeof hexo.config.skip_render !== 'undefined') {
-      choose = choose && !utils.isIgnore(path0, hexo.config.skip_render, this);
-    }
-    return choose;
-  });
 }
 
 function filter_adshtml(hexo: Hexo): string[] {
