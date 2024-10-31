@@ -1,29 +1,21 @@
 {
   "$schema": "http://json.schemastore.org/nodemon",
-  "exec": "clear && yarn run build && yarn run pack && yarn workspace hexo-adsense-site run copy",
+  "exec": "yarn run build && yarn run pack",
   "watch": [
-    "./src/**/*.{ts,cjs,mjs,js}",
-    "./src/**/*.xml",
-    "./src/**/*.xsl",
-    "./rollup*.*",
-    "./gulp*.*",
-    "./package.json",
-    "./test/demo/views/**/*"
+    "./src/**/*.ts",
+    "./rollup.config.js",
+    "./gulpfile.js",
+    "./test/demo/views/**/*",
+    "./source/*"
   ],
   "ignore": [
-    "*.test.js",
-    ".vscode",
-    ".gitignore",
-    "gh-pages",
-    "**/dist/**",
-    "tests",
+    "**/.deploy_*/**",
     "**/node_modules/**",
-    "test",
-    "tmp",
-    "temp",
+    "**/temp/**",
+    "**/dist/**",
     "**/tmp/**"
   ],
   "delay": 3000,
-  "ext": "js,cjs,mjs,ts,xml,xsl",
-  "verbose": false
+  "ext": "js,cjs,mjs,ts,xml,xsl,css,njk,ejs,pug",
+  "verbose": true
 }

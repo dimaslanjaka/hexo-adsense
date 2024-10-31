@@ -10,6 +10,7 @@ import path from 'path';
 import * as prettier from 'prettier';
 import { fileURLToPath } from 'url';
 // import injector2 from '../packages/hexo-extend-injector2/index';
+import * as hexoUtil from 'hexo-util';
 import { after_post_render, after_render_html } from './article-ads';
 import getConfig from './config';
 import logger, { debugLog, logname } from './logger';
@@ -34,15 +35,36 @@ if (typeof hexo !== 'undefined' && typeof hexo.config.adsense !== 'undefined') {
     logger.error(logname + '(config)', `adsense ca-pub (adsense.pub) not configured in _config.yml`);
   } else {
     if (config.enable) {
-      // Write config on </head>
-      // injector.register('head_end', function () {
-      //   const adsenseConfigObject = JSON.stringify(
-      //     assign(config, hexo.env, { adsense: hexo.config.adsense }),
-      //     null,
-      //     isDevelopment ? 2 : undefined
-      //   );
-      //   return `<script id="hexo-adsense-config" type="application/json">${adsenseConfigObject}</script>`;
-      // });
+      // Router register
+      const routeOptions = [
+        {
+          route: '/hexo-adsense/article-ads.js',
+          src: path.join(__dirname, 'source/article-ads.js'),
+          type: 'text/javascript'
+        },
+        {
+          route: '/hexo-adsense/article-ads.css',
+          src: path.join(__dirname, 'source/article-ads.css'),
+          type: 'text/css'
+        }
+      ];
+      routeOptions.forEach((item) => {
+        const routePath = item.route;
+        const sourcePath = item.src;
+        const contentType = item.type;
+        hexo.extend.generator.register(hexoUtil.url_for.call(hexo, routePath), () => {
+          return {
+            path: routePath,
+            data: () => fs.createReadStream(sourcePath)
+          };
+        });
+        hexo.extend.filter.register('server_middleware', function (app: import('connect').Server) {
+          app.use(routePath, function (_req, res) {
+            res.setHeader('content-type', contentType);
+            res.end(fs.readFileSync(sourcePath).toString());
+          });
+        });
+      });
 
       hexo.extend.filter.register('after_render:html', function (content: string, _data: HexoLocalsData) {
         const lastBodyRegex = /<\/body>(?=[^<]*$)/;

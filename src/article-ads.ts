@@ -2,6 +2,7 @@ import { globSync } from 'glob';
 import Hexo from 'hexo';
 import fs from 'hexo-fs';
 import { default as hexoIs } from 'hexo-is';
+import * as hexoUtil from 'hexo-util';
 import { HexoLocalsData } from 'hexo/dist/hexo/locals-d';
 import { minimatch } from 'minimatch';
 import path from 'path';
@@ -64,7 +65,7 @@ function articleAds(files: string[], hexo: Hexo): string[] {
   return result;
 }
 
-function after_generate(this: Hexo) {
+function _after_generate(this: Hexo) {
   const hexo = this;
   const route = hexo.route;
   const options = parseConfig(hexo);
@@ -151,11 +152,9 @@ export function after_post_render(this: Hexo, data: any): any {
 function processAdsHtml(content: string, adshtml: string[], hexo: Hexo): string {
   const options = parseConfig(hexo);
   const replacement = memoize((adshtml: string[]) => {
-    const adsContentCss = path.join(__dirname, 'source/article-ads.css');
-    const adsContentJs = path.join(__dirname, 'source/article-ads.js');
     let replacement = `<div id="hexo-adsense-hidden" style="display:none">${adshtml.join('')}</div>`;
-    if (fs.existsSync(adsContentCss)) replacement += `<style>${fs.readFileSync(adsContentCss).toString()}</style>`;
-    if (fs.existsSync(adsContentJs)) replacement += `<script>${fs.readFileSync(adsContentJs).toString()}</script>`;
+    replacement += `<script src='${hexoUtil.url_for.call(hexo, '/hexo-adsense/article-ads.js')}'></script>`;
+    replacement += `<link rel="stylesheet" href='${hexoUtil.url_for.call(hexo, '/hexo-adsense/article-ads.css')}'>`;
     return replacement;
   });
 
