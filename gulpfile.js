@@ -11,6 +11,8 @@ import * as terser from 'terser';
 import { fileURLToPath } from 'url';
 import pkg from './package.json' assert { type: 'json' };
 import * as cp from 'cross-spawn';
+import browserify from 'browserify';
+import through2 from 'through2';
 
 // ESM-compatible __dirname replacement
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -23,7 +25,32 @@ function promiseStream(stream) {
 }
 
 function sourceJs() {
-  return gulp.src('./source/*.js').pipe(gulpTerser({}, terser.minify)).pipe(gulp.dest('./dist/source'));
+  return gulp
+    .src('./source/*.js')
+    .pipe(
+      through2.obj((file, enc, next) => {
+        var self = this;
+
+        if (file.isStream()) {
+          self.emit('error', new Error('browserify', 'Streams not supported'));
+          return next();
+        }
+
+        if (file.isNull()) {
+          return next();
+        }
+
+        const b = browserify();
+        b.add(file.path);
+        b.bundle(function (err, result) {
+          if (err) return next(err);
+          file.contents = result;
+          next(null, file);
+        });
+      })
+    )
+    .pipe(gulpTerser({}, terser.minify))
+    .pipe(gulp.dest('./dist/source'));
 }
 
 function sourceCss() {

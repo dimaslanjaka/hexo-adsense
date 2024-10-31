@@ -1,6 +1,6 @@
 {
   "name": "hexo-adsense",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Hexo adsense support",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -95,9 +95,11 @@
     "@types/minimist": "^1",
     "@types/node": "^22.8.1",
     "@types/object-assign": "^4",
+    "@types/through2": "https://github.com/dimaslanjaka/nodejs-package-types/raw/through2/release/types-through2.tgz",
     "@types/underscore": "^1",
     "@typescript-eslint/eslint-plugin": "^8.11.0",
     "@typescript-eslint/parser": "^8.11.0",
+    "browserify": "^17.0.1",
     "cross-spawn": "^7.0.3",
     "eslint": "^9.13.0",
     "eslint-config-prettier": "^9.1.0",
@@ -119,6 +121,7 @@
     "rimraf": "^6.0.1",
     "rollup": "4.24.0",
     "rollup-plugin-dts": "^6.1.1",
+    "through2": "^4.0.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
   },

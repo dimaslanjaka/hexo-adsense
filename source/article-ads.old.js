@@ -1,14 +1,13 @@
-/* eslint-disable no-undef */
 /**
  * Browser processor
  */
 
-const isBrowser = new Function("try {return this===window;}catch(e){ return false;}");
+const isBrowser = new Function('try {return this===window;}catch(e){ return false;}');
 
 /**
  * @type {import("../src/config")}
  */
-const hexoAdsenseConfig = JSON.parse(document.getElementById("hexo-adsense-config").textContent);
+const hexoAdsenseConfig = JSON.parse(document.getElementById('hexo-adsense-config').textContent);
 //console.log(hexoAdsenseConfig);
 
 /**
@@ -25,7 +24,7 @@ function insertAfter(newElement, oldElement) {
       parent.insertBefore(newElement, oldElement.nextSibling);
     }
   } else {
-    console.error("cannot insert element");
+    console.error('cannot insert element');
   }
 }
 
@@ -36,8 +35,8 @@ function insertAfter(newElement, oldElement) {
  */
 function replaceWith(newElement, oldElement) {
   if (!oldElement.parentNode) {
-    console.log(oldElement, "parent null");
-    let d = document.createElement("div");
+    console.log(oldElement, 'parent null');
+    let d = document.createElement('div');
     d.appendChild(oldElement);
   } else {
     //console.log(oldElement.parentNode.tagName);
@@ -54,7 +53,7 @@ let createElementFromHTML = function (htmlString) {
   if (htmlString instanceof HTMLElement) {
     return htmlString;
   }
-  var div = document.createElement("div");
+  var div = document.createElement('div');
   div.innerHTML = htmlString.trim();
 
   // Change this to div.childNodes to support multiple top-level nodes
@@ -62,16 +61,16 @@ let createElementFromHTML = function (htmlString) {
 };
 
 function oldMethod() {
-  let article = document.getElementsByTagName("article");
-  let adscont = document.getElementById("hexo-adsense-ads-content");
+  let article = document.getElementsByTagName('article');
+  let adscont = document.getElementById('hexo-adsense-ads-content');
   if (adscont && adscont.length) {
     if (article && article.length) {
-      let linebreak = article.item(0).getElementsByTagName("br");
+      let linebreak = article.item(0).getElementsByTagName('br');
       if (linebreak.length > 0) {
         return replaceWith(adscont, linebreak.item(0));
       }
 
-      let headings = article.item(0).querySelectorAll("h2,h3,h4,h5");
+      let headings = article.item(0).querySelectorAll('h2,h3,h4,h5');
       if (headings && headings.length > 0) {
         return insertAfter(adscont, headings.item(0));
       }
@@ -88,24 +87,24 @@ function ranumb(min, max) {
 }
 
 function newMethod() {
-  const adshide = document.getElementById("hexo-adsense-hidden");
+  const adshide = document.getElementById('hexo-adsense-hidden');
   let adscont = adshide.querySelectorAll('[hexo-adsense="ads-content"]');
-  const article = document.querySelectorAll("article");
+  const article = document.querySelectorAll('article');
   if (article.length > 0 && adscont.length > 0) {
     /**
      * @type {HTMLElement}
      */
     let ads;
     if (article.length == 1) {
-      console.log("webpage is post");
+      console.log('webpage is post');
       let targetArticle = article.item(0);
 
       // prioritize hexo-adsense-fill before auto ads on other elements
-      const ads_fill = targetArticle.querySelectorAll("*[hexo-adsense-fill]");
+      const ads_fill = targetArticle.querySelectorAll('*[hexo-adsense-fill]');
       if (ads_fill.length > 0) {
         for (let index = 0; index < ads_fill.length; index++) {
           const toFill = ads_fill[index];
-          if (typeof adscont[index] !== "undefined") {
+          if (typeof adscont[index] !== 'undefined') {
             toFill.appendChild(adscont[index]);
           }
         }
@@ -115,7 +114,7 @@ function newMethod() {
       adscont = adshide.querySelectorAll('[hexo-adsense="ads-content"]');
       //console.log(adscont.length, "ads left");
       if (adscont.length > 0) {
-        const headers = targetArticle.querySelectorAll("h1,h2,h3,h4,h5,h6,pre");
+        const headers = targetArticle.querySelectorAll('h1,h2,h3,h4,h5,h6,pre');
         if (headers.length > 0) {
           // generate index of headers
           let headers_index = Array.apply(null, { length: headers.length }).map(Number.call, Number);
@@ -125,7 +124,7 @@ function newMethod() {
             const rheaders = shuffleArr2(headers_index);
             // pick a random index
             const rheader = rheaders.next().value;
-            if (typeof rheader === "number") {
+            if (typeof rheader === 'number') {
               const header = headers.item(rheader);
               insertAfter(createElementFromHTML(ads), header);
             }
@@ -136,7 +135,7 @@ function newMethod() {
       // the rest of the ads will show automatically to linebreak elements
       adscont = adshide.querySelectorAll('[hexo-adsense="ads-content"]');
       if (adscont.length > 0) {
-        const linebreaks = targetArticle.querySelectorAll("br,hr");
+        const linebreaks = targetArticle.querySelectorAll('br,hr');
         if (linebreaks.length > 0) {
           // generate index of linebreaks
           let linebreaks_index = Array.apply(null, { length: linebreaks.length }).map(Number.call, Number);
@@ -147,10 +146,10 @@ function newMethod() {
             ads = adscont[index];
             // pick a random index
             const rlinebreak = rlinebreaks.next().value;
-            if (typeof rlinebreak == "number") {
+            if (typeof rlinebreak == 'number') {
               const linebreak = linebreaks.item(rlinebreak);
               if (
-                ["blockquote", "img", "a", "pre", "code", "em", "strong", "i", "u"].includes(
+                ['blockquote', 'img', 'a', 'pre', 'code', 'em', 'strong', 'i', 'u'].includes(
                   linebreak.parentNode.tagName.toLowerCase()
                 )
               ) {
@@ -164,7 +163,7 @@ function newMethod() {
         }
       }
     } else {
-      console.log("webpage is not post");
+      console.log('webpage is not post');
       // generate index of articles
       let articles_index = Array.apply(null, { length: article.length }).map(Number.call, Number);
       // randomize linebreaks index
@@ -173,7 +172,7 @@ function newMethod() {
         ads = adscont[index];
         // pick a random index
         const rArticle = rArticles.next().value;
-        if (typeof rArticle == "number") {
+        if (typeof rArticle == 'number') {
           //console.log("adsense display to article index", rArticle);
           const pickArticle = article.item(rArticle);
           pickArticle.appendChild(createElementFromHTML(ads));
@@ -187,15 +186,15 @@ function newMethod() {
 }
 
 function eventMethod() {
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener('DOMContentLoaded', function () {
     // we look for the jump break
-    var _moreElm = document.querySelector("a[name=more]");
+    var _moreElm = document.querySelector('a[name=more]');
 
     // here is your adsense code
-    var _adsenseCode = " [replace this with code from the last step] ";
+    var _adsenseCode = ' [replace this with code from the last step] ';
 
     // This inserts the ad inside of the blog post
-    _moreElm.insertAdjacentHTML("afterend", '<div class="adsense-after-break">' + _adsenseCode + "</div>");
+    _moreElm.insertAdjacentHTML('afterend', '<div class="adsense-after-break">' + _adsenseCode + '</div>');
 
     // Initialize the ads here
     (adsbygoogle = window.adsbygoogle || []).push({});
@@ -241,7 +240,7 @@ function* shuffleArr2(array) {
 function adsensePush() {
   for (let index = 0; index < document.querySelectorAll('[hexo-adsense="ads-content"]').length; index++) {
     (adsbygoogle = window.adsbygoogle || []).push({
-      google_ad_client: hexoAdsenseConfig.pub,
+      google_ad_client: hexoAdsenseConfig.pub
     });
   }
 }
@@ -249,22 +248,22 @@ function adsensePush() {
 if (!isBrowser()) {
   module.exports = {
     replaceWith,
-    insertAfter,
+    insertAfter
   };
 } else {
   window.__tcfapi = (command, parameter, callback) => {
-    if (command === "checkConsent") {
+    if (command === 'checkConsent') {
       callback(true);
     }
-    if (command === "addEventListener") {
-      callback({ eventStatus: "tcloaded", gdprApplies: false }, true);
+    if (command === 'addEventListener') {
+      callback({ eventStatus: 'tcloaded', gdprApplies: false }, true);
     }
   };
 
-  if (typeof document.addEventListener == "function") {
-    document.addEventListener("DOMContentLoaded", newMethod);
-  } else if (typeof window.attachEvent == "function") {
-    window.attachEvent("onload", newMethod);
+  if (typeof document.addEventListener == 'function') {
+    document.addEventListener('DOMContentLoaded', newMethod);
+  } else if (typeof window.attachEvent == 'function') {
+    window.attachEvent('onload', newMethod);
   } else {
     window.onload = newMethod;
   }
