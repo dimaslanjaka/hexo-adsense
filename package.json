@@ -28,7 +28,6 @@
     "minor": "npm version minor",
     "major": "npm version major",
     "prepare": "husky",
-    "prepack": "node package-switch.cjs production",
     "pack": "node packer.cjs --yarn",
     "clone:docs": "git clone https://github.com/dimaslanjaka/docs.git .deploy_git"
   },
