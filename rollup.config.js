@@ -1,12 +1,11 @@
+import babel from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
-import babel from '@rollup/plugin-babel';
 import fs from 'fs';
 import jsonc from 'jsonc-parser';
 import path from 'path';
-import { dts } from 'rollup-plugin-dts';
 import { fileURLToPath } from 'url';
 
 // ESM-compatible __dirname replacement
@@ -20,19 +19,6 @@ const { author, dependencies, devDependencies, name, version } = pkg;
 export const external = Object.keys(dependencies)
   .concat(...Object.keys(devDependencies), 'lodash', 'underscore')
   .filter((pkgName) => !['hexo-is', 'p-limit', 'deepmerge-ts'].includes(pkgName));
-
-/**
- * @type {import('rollup').RollupOptions}
- */
-const declarations = {
-  input: './tmp/dist/src/index.d.ts',
-  output: [
-    { file: 'dist/index.d.ts', format: 'es' },
-    { file: 'dist/index.d.cts', format: 'es' },
-    { file: 'dist/index.d.mts', format: 'es' }
-  ],
-  plugins: [dts()]
-};
 
 const banner = `// ${name} ${version} by ${author.name} <${author.email}> (${author.url})`.trim();
 const esmBanner = `
@@ -94,4 +80,4 @@ const libs = {
   ]
 };
 
-export default [declarations, libs];
+export default [libs];
