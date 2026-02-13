@@ -36,9 +36,6 @@
   "files": [
     "dist/"
   ],
-  "workspaces": [
-    "test/demo"
-  ],
   "keywords": [
     "hexo",
     "auto",
