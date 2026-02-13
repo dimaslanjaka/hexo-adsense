@@ -9,7 +9,7 @@ import gulpTerser from 'gulp-terser';
 import path from 'path';
 import * as terser from 'terser';
 import { fileURLToPath } from 'url';
-import pkg from './package.json' assert { type: 'json' };
+import pkg from './package.json' with { type: 'json' };
 import * as cp from 'cross-spawn';
 import browserify from 'browserify';
 import through2 from 'through2';
