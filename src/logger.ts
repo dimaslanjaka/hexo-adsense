@@ -30,7 +30,7 @@ const logger = {
 };
 
 export const debugLog = function (...args: any[]) {
-  debug('hexo-adsense')(...args);
+  (debug('hexo-adsense') as (...a: any[]) => void)(...args);
   defaultLogger.debug(logname, ...args);
 };
 
