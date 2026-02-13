@@ -15,6 +15,7 @@
     "checkJs": false,
     // Generate d.ts files
     "declaration": true,
+    "declarationDir": "tmp/dist/types",
     // This compiler run should
     // only output d.ts files
     // "emitDeclarationOnly": false,
