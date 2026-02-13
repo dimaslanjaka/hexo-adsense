@@ -265,9 +265,13 @@ function newMethod() {
         // pick a random index
         const rArticle = rArticles.next().value;
         if (typeof rArticle == 'number') {
-          //console.log("adsense display to article index", rArticle);
+          // console.log("adsense display to article index", rArticle);
           const pickArticle = article.item(rArticle);
-          pickArticle.appendChild(createElementFromHTML(ads));
+          if (pickArticle) {
+            pickArticle.appendChild(createElementFromHTML(ads));
+          } else {
+            console.error('cannot find article at index', rArticle);
+          }
         }
       }
     }
