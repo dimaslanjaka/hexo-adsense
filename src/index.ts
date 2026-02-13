@@ -3,8 +3,8 @@
 
 import fs from 'fs-extra';
 import Hexo from 'hexo';
-import { StoreFunction } from 'hexo/dist/extend/renderer-d';
 import { HexoLocalsData } from 'hexo/dist/hexo/locals-d';
+import { StoreFunction } from 'hexo/dist/types';
 import assign from 'object-assign';
 import path from 'path';
 import * as prettier from 'prettier';
