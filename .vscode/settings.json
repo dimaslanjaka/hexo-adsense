@@ -3,47 +3,48 @@
     "*.njk": "nunjucks",
     "*.nj": "nunjucks"
   },
+  "terminal.integrated.defaultProfile.windows": "Command Prompt",
   "terminal.integrated.env.linux": {
-    "PATH": "${env:PATH}:${workspaceFolder}/node_modules/.bin:${workspaceFolder}/bin:${workspaceFolder}/vendor/bin",
-    "NUITKA_CACHE_DIR": "${workspaceFolder}\\tmp\\nuitka-cache",
+    "DEBUG_PKG": "1",
     "ESLINT_USE_FLAT_CONFIG": "true",
-    "DEBUG_PKG": "1"
+    "NUITKA_CACHE_DIR": "${workspaceFolder}/tmp/nuitka-cache",
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:${workspaceFolder}/bin:${workspaceFolder}/node_modules/.bin:${workspaceFolder}/vendor/bin",
+    "PHP_CS_FIXER_IGNORE_ENV": "1"
   },
   "terminal.integrated.env.windows": {
-    "PATH": "${env:PATH};${workspaceFolder}\\node_modules\\.bin;${workspaceFolder}\\bin;${workspaceFolder}\\vendor\\bin",
-    "NUITKA_CACHE_DIR": "${workspaceFolder}\\tmp\\nuitka-cache",
-    "ESLINT_USE_FLAT_CONFIG": "true",
     "DEBUG_PKG": "1",
-    "NODE_OPTIONS": "--max-old-space-size=2192"
+    "ESLINT_USE_FLAT_CONFIG": "true",
+    "NUITKA_CACHE_DIR": "${workspaceFolder}\\tmp\\nuitka-cache",
+    "PATH": "${env:LOCALAPPDATA}\\nvm;C:\\nvm4w\\nodejs;C:\\Program Files\\Git\\cmd;C:\\Program Files\\Git\\usr\\bin;${env:PATH};${workspaceFolder}\\node_modules\\.bin;${workspaceFolder}\\bin;${workspaceFolder}\\vendor\\bin",
+    "PHP_CS_FIXER_IGNORE_ENV": "1"
   },
   "terminal.integrated.profiles.windows": {
-    "PowerShell": {
-      "source": "PowerShell",
-      "icon": "terminal-powershell"
-    },
-    "Command Prompt": {
-      "path": [
-        "${env:windir}\\Sysnative\\cmd.exe",
-        "${env:windir}\\System32\\cmd.exe"
-      ],
-      "args": [],
-      "icon": "terminal-cmd"
-    },
-    "Git Bash": {
-      "source": "Git Bash"
-    },
     "Cygwin": {
-      "path": "bash.exe",
       "args": [
         "--login",
         "-i"
       ],
       "env": {
         "CHERE_INVOKING": "1"
-      }
+      },
+      "path": "C:\\cygwin64\\bin\\bash.exe"
+    },
+    "Command Prompt": {
+      "args": [],
+      "icon": "terminal-cmd",
+      "path": [
+        "${env:windir}\\Sysnative\\cmd.exe",
+        "${env:windir}\\System32\\cmd.exe"
+      ]
+    },
+    "Git Bash": {
+      "source": "Git Bash"
+    },
+    "PowerShell": {
+      "icon": "terminal-powershell",
+      "source": "PowerShell"
     }
   },
-  "terminal.integrated.defaultProfile.windows": "Command Prompt",
   "npm.enableRunFromFolder": true,
   "files.autoSave": "onWindowChange",
   "files.autoSaveDelay": 30000,
