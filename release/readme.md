@@ -4,7 +4,8 @@
 | :--- | :--- |
 | 2.0.0 | https://github.com/dimaslanjaka/hexo-adsense/raw/2f18ada/release/hexo-adsense-2.0.0.tgz |
 | 2.0.1 | https://github.com/dimaslanjaka/hexo-adsense/raw/a42680c/release/hexo-adsense-2.0.1.tgz |
-| latest | https://github.com/dimaslanjaka/hexo-adsense/raw/a42680c/release/hexo-adsense.tgz |
+| 2.0.2 | https://github.com/dimaslanjaka/hexo-adsense/raw/c5f7b99/release/hexo-adsense-2.0.2.tgz |
+| latest | https://github.com/dimaslanjaka/hexo-adsense/raw/c5f7b99/release/hexo-adsense.tgz |
 | latest | https://github.com/dimaslanjaka/hexo-adsense/raw/master/release/hexo-adsense.tgz |
 
 use this tarball with `resolutions`:

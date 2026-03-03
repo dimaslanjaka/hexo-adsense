@@ -266,7 +266,7 @@ function newMethod() {
         const rArticle = rArticles.next().value;
         if (typeof rArticle == 'number') {
           // console.log("adsense display to article index", rArticle);
-          const pickArticle = article.item(rArticle);
+          const pickArticle = article[rArticle];
           if (pickArticle) {
             pickArticle.appendChild(createElementFromHTML(ads));
           } else {
